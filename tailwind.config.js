@@ -15,6 +15,9 @@ module.exports = {
         Montserrat: "'Montserrat', sans-serif",
         roboto: "'Roboto', sans-serif",
       },
+      colors: {
+        primary: "#3f51b5",
+      },
     },
   },
   plugins: [],
