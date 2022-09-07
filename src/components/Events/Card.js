@@ -6,22 +6,14 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
 
 export default function BasicCard() {
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275, mb: "1.2rem" }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+        {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Word of the Day
-        </Typography>
+        </Typography> */}
         <Typography
           variant="h5"
           component="div"

@@ -21,6 +21,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import BasicCard from "./../Events/Card";
 import EventSection from "./../Events/index";
+import ProfilePage from "./../profile/index";
 const drawerWidth = 300;
 
 export default function PermanentDrawerLeft() {
@@ -181,11 +182,13 @@ export default function PermanentDrawerLeft() {
       </Drawer>
       {/* bg-cyan-50/25 */}
       <Box
-        className="bg-gray-100/75	 h-screen	"
+        className="bg-gray-100/75	min-h-screen"
         component="main"
-        sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
+        sx={{ flexGrow: 1, p: 3 }}
       >
-        <EventSection />
+        {/* bgcolor: "rgb(243 244 246)" */}
+        {/* <EventSection /> */}
+        <ProfilePage />
       </Box>
     </Box>
   );
