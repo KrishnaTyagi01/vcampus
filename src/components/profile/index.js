@@ -3,9 +3,19 @@ import { Container } from "@mui/material";
 import { Typography, TextField, Button } from "@mui/material";
 import Image from "next/image";
 import nouser from "../../assets/nouser.jpg";
+import ChooseCollegeForm from "./ChooseCollege";
 function ProfilePage() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Container className="bg-white rounded-xl">
+      <ChooseCollegeForm open={open} handleClose={handleClose} />
       <div className="flex justify-between items-center px-4">
         <div className="px-10 py-10 flex items-center">
           <Image
@@ -73,7 +83,7 @@ function ProfilePage() {
           <span className="text-gray-500 font-roboto text-sm capitalize pr-2	">
             Not your university?
           </span>
-          <Button sx={{}} className="text-primary">
+          <Button sx={{}} onClick={handleClickOpen} className="text-primary">
             Change
           </Button>
         </span>

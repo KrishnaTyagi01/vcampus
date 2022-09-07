@@ -22,6 +22,7 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import BasicCard from "./../Events/Card";
 import EventSection from "./../Events/index";
 import ProfilePage from "./../profile/index";
+import Button from "@mui/material/Button";
 const drawerWidth = 300;
 
 export default function PermanentDrawerLeft() {
@@ -53,132 +54,149 @@ export default function PermanentDrawerLeft() {
         sd
         anchor="left"
       >
-        {/* show user  */}
-        <div className="flex flex-col justify-items-center items-center mt-8">
-          <Image
-            src={nouser}
-            height="130px"
-            width="130px"
-            layout="fixed"
-            className="justify-self-center	justify-items-center"
-            style={{ borderRadius: "50%" }}
-          />
+        <div className="flex flex-col justify-between  h-screen">
+          {/* show user  */}
+          <div>
+            <div className="flex flex-col justify-items-center items-center mt-8">
+              <Image
+                src={nouser}
+                height="130px"
+                width="130px"
+                layout="fixed"
+                className="justify-self-center	justify-items-center"
+                style={{ borderRadius: "50%" }}
+              />
 
-          <span className="font-roboto font-bold capitalize">
-            Krishna Tyagi
-          </span>
-          <span className="font-Mono font-extralight text-sm	opacity-50	 capitalize text-[#DCDCDC	]">
-            new delhi, India
-          </span>
-        </div>
+              <span className="font-roboto font-bold capitalize">
+                Krishna Tyagi
+              </span>
+              <span className="font-Mono font-extralight text-sm	opacity-50	 capitalize text-[#DCDCDC	]">
+                new delhi, India
+              </span>
+            </div>
 
-        <Toolbar />
-        <Divider />
-        <List className="font-roboto">
-          <ListItem
-            disablePadding
-            onClick={() => setActive("events")}
-            style={{ marginBottom: ".5rem" }}
-            className={
-              active === "events" ? "text-[#3f51b5] font-bold text-3xl" : ""
-            }
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <EventIcon
-                  style={active === "events" ? { color: "#3f51b5" } : {}}
-                />
-              </ListItemIcon>
-              <span
+            <Toolbar />
+            <Divider />
+            <List className="font-roboto">
+              <ListItem
+                disablePadding
+                onClick={() => setActive("events")}
+                style={{ marginBottom: ".5rem" }}
                 className={
-                  active === "events"
-                    ? "font-roboto text-base capitalize "
-                    : "text-base capitalize"
+                  active === "events" ? "text-[#3f51b5] font-bold text-3xl" : ""
                 }
               >
-                Events
-              </span>
-            </ListItemButton>
-          </ListItem>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <EventIcon
+                      style={active === "events" ? { color: "#3f51b5" } : {}}
+                    />
+                  </ListItemIcon>
+                  <span
+                    className={
+                      active === "events"
+                        ? "font-roboto text-base capitalize "
+                        : "text-base capitalize"
+                    }
+                  >
+                    Events
+                  </span>
+                </ListItemButton>
+              </ListItem>
 
-          <ListItem
-            disablePadding
-            onClick={() => setActive("cafe")}
-            style={{ marginBottom: ".5rem" }}
-            className={
-              active === "cafe" ? "text-[#3f51b5] font-bold text-3xl" : ""
-            }
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <ChatIcon
-                  style={active === "cafe" ? { color: "#3f51b5" } : {}}
-                />
-              </ListItemIcon>
-              <span
+              <ListItem
+                disablePadding
+                onClick={() => setActive("cafe")}
+                style={{ marginBottom: ".5rem" }}
                 className={
-                  active === "cafe"
-                    ? "font-roboto text-base capitalize "
-                    : "text-base capitalize"
+                  active === "cafe" ? "text-[#3f51b5] font-bold text-3xl" : ""
                 }
               >
-                Cafeteria Talks
-              </span>
-            </ListItemButton>
-          </ListItem>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <ChatIcon
+                      style={active === "cafe" ? { color: "#3f51b5" } : {}}
+                    />
+                  </ListItemIcon>
+                  <span
+                    className={
+                      active === "cafe"
+                        ? "font-roboto text-base capitalize "
+                        : "text-base capitalize"
+                    }
+                  >
+                    Cafeteria Talks
+                  </span>
+                </ListItemButton>
+              </ListItem>
 
-          <ListItem
-            disablePadding
-            onClick={() => setActive("Profile")}
-            style={{ marginBottom: ".5rem" }}
-            className={
-              active === "Profile" ? "text-[#3f51b5] font-bold text-3xl" : ""
-            }
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <ManageAccountsIcon
-                  style={active === "Profile" ? { color: "#3f51b5" } : {}}
-                />
-              </ListItemIcon>
-              <span
+              <ListItem
+                disablePadding
+                onClick={() => setActive("Profile")}
+                style={{ marginBottom: ".5rem" }}
                 className={
                   active === "Profile"
-                    ? "font-roboto text-base capitalize "
-                    : "text-base capitalize"
+                    ? "text-[#3f51b5] font-bold text-3xl"
+                    : ""
                 }
               >
-                Profile
-              </span>
-            </ListItemButton>
-          </ListItem>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <ManageAccountsIcon
+                      style={active === "Profile" ? { color: "#3f51b5" } : {}}
+                    />
+                  </ListItemIcon>
+                  <span
+                    className={
+                      active === "Profile"
+                        ? "font-roboto text-base capitalize "
+                        : "text-base capitalize"
+                    }
+                  >
+                    Profile
+                  </span>
+                </ListItemButton>
+              </ListItem>
 
-          <ListItem
-            disablePadding
-            onClick={() => setActive("news")}
-            style={{ marginBottom: ".5rem" }}
-            className={
-              active === "news" ? "text-[#3f51b5] font-bold text-3xl" : ""
-            }
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <NewspaperIcon
-                  style={active === "news" ? { color: "#3f51b5" } : {}}
-                />
-              </ListItemIcon>
-              <span
+              <ListItem
+                disablePadding
+                onClick={() => setActive("news")}
+                style={{ marginBottom: ".5rem" }}
                 className={
-                  active === "news"
-                    ? "font-roboto text-base capitalize "
-                    : "text-base capitalize"
+                  active === "news" ? "text-[#3f51b5] font-bold text-3xl" : ""
                 }
               >
-                Campus News
-              </span>
-            </ListItemButton>
-          </ListItem>
-        </List>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <NewspaperIcon
+                      style={active === "news" ? { color: "#3f51b5" } : {}}
+                    />
+                  </ListItemIcon>
+                  <span
+                    className={
+                      active === "news"
+                        ? "font-roboto text-base capitalize "
+                        : "text-base capitalize"
+                    }
+                  >
+                    Campus News
+                  </span>
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </div>
+        </div>
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: "#ff1744",
+            outline: "none",
+            border: "none",
+          }}
+          className="mb-8"
+        >
+          Logout
+        </Button>
       </Drawer>
       {/* bg-cyan-50/25 */}
       <Box
@@ -189,6 +207,9 @@ export default function PermanentDrawerLeft() {
         {/* bgcolor: "rgb(243 244 246)" */}
         {/* <EventSection /> */}
         <ProfilePage />
+      </Box>
+      <Box style={{ width: "25rem" }} component="main">
+        <div>Hellow world</div>
       </Box>
     </Box>
   );
