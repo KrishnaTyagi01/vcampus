@@ -23,6 +23,8 @@ import BasicCard from "./../Events/Card";
 import EventSection from "./../Events/index";
 import ProfilePage from "./../profile/index";
 import Button from "@mui/material/Button";
+import MyEventCard from "../MyEvents/MyEventCard";
+import EventsPage from "../MyEvents";
 const drawerWidth = 300;
 
 export default function PermanentDrawerLeft() {
@@ -160,26 +162,28 @@ export default function PermanentDrawerLeft() {
 
               <ListItem
                 disablePadding
-                onClick={() => setActive("news")}
+                onClick={() => setActive("myevents")}
                 style={{ marginBottom: ".5rem" }}
                 className={
-                  active === "news" ? "text-[#3f51b5] font-bold text-3xl" : ""
+                  active === "myevents"
+                    ? "text-[#3f51b5] font-bold text-3xl"
+                    : ""
                 }
               >
                 <ListItemButton>
                   <ListItemIcon>
                     <NewspaperIcon
-                      style={active === "news" ? { color: "#3f51b5" } : {}}
+                      style={active === "myevents" ? { color: "#3f51b5" } : {}}
                     />
                   </ListItemIcon>
                   <span
                     className={
-                      active === "news"
+                      active === "myevents"
                         ? "font-roboto text-base capitalize "
                         : "text-base capitalize"
                     }
                   >
-                    Campus News
+                    My Events
                   </span>
                 </ListItemButton>
               </ListItem>
@@ -206,7 +210,9 @@ export default function PermanentDrawerLeft() {
       >
         {/* bgcolor: "rgb(243 244 246)" */}
         {/* <EventSection /> */}
-        <ProfilePage />
+        {/* <ProfilePage /> */}
+        {/* <MyEventCard /> */}
+        <EventsPage />
       </Box>
       <Box style={{ width: "25rem" }} component="main">
         <div>Hellow world</div>

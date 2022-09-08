@@ -39,8 +39,12 @@ export default function ChooseCollegeForm({ open, handleClose }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
+          <Button onClick={handleClose} className="text-primary  ">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} className="text-primary  ">
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
