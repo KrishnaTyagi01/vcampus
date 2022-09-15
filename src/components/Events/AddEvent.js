@@ -34,9 +34,6 @@ export default function AddEvent({ eventOpen, handleClose }) {
 
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button> */}
       <Dialog open={eventOpen} onClose={handleClose}>
         <DialogTitle>Add New Event</DialogTitle>
         <DialogContent>

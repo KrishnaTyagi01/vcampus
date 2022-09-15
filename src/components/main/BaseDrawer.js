@@ -25,9 +25,10 @@ import ProfilePage from "./../profile/index";
 import Button from "@mui/material/Button";
 import MyEventCard from "../MyEvents/MyEventCard";
 import EventsPage from "../MyEvents";
+import { signIn, signOut, useSession } from "next-auth/react";
 const drawerWidth = 300;
 
-export default function PermanentDrawerLeft() {
+export default function BaseDrawer({ email }) {
   const [active, setActive] = useState("events");
 
   return (
@@ -71,6 +72,7 @@ export default function PermanentDrawerLeft() {
 
               <span className="font-roboto font-bold capitalize">
                 Krishna Tyagi
+                {email}
               </span>
               <span className="font-Mono font-extralight text-sm	opacity-50	 capitalize text-[#DCDCDC	]">
                 new delhi, India
@@ -192,6 +194,7 @@ export default function PermanentDrawerLeft() {
         </div>
         <Button
           variant="contained"
+          onClick={signOut}
           style={{
             backgroundColor: "#ff1744",
             outline: "none",
@@ -209,10 +212,10 @@ export default function PermanentDrawerLeft() {
         sx={{ flexGrow: 1, p: 3 }}
       >
         {/* bgcolor: "rgb(243 244 246)" */}
-        {/* <EventSection /> */}
+        <EventSection />
         {/* <ProfilePage /> */}
         {/* <MyEventCard /> */}
-        <EventsPage />
+        {/* <EventsPage /> */}
       </Box>
       <Box style={{ width: "25rem" }} component="main">
         <div>Hellow world</div>

@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import BasicCard from "./Card";
 import AddEvent from "./AddEvent";
+
 function EventSection() {
   const [eventOpen, setEventOpen] = React.useState(false);
 
@@ -15,6 +16,8 @@ function EventSection() {
   const handleClose = () => {
     setEventOpen(false);
   };
+
+  const postNewEvent = async () => {};
   return (
     <>
       <AddEvent eventOpen={eventOpen} handleClose={handleClose} />
@@ -35,6 +38,7 @@ function EventSection() {
         >
           Add New Event
         </Button>
+        <button onClick={() => postNewEvent()}>test</button>
       </div>
 
       <div className="mt-10 ">

@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function ButtonAppBar() {
   return (
@@ -24,7 +26,11 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Campus
           </Typography>
-          <Button color="inherit">Login</Button>
+          {/* <Link href="/api/auth/signin"> */}
+          <Button color="inherit" onClick={() => signIn()}>
+            Login
+          </Button>
+          {/* </Link> */}
         </Toolbar>
       </AppBar>
     </Box>
