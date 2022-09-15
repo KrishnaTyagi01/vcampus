@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -25,11 +25,22 @@ import ProfilePage from "./../profile/index";
 import Button from "@mui/material/Button";
 import MyEventCard from "../MyEvents/MyEventCard";
 import EventsPage from "../MyEvents";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
 const drawerWidth = 300;
 
 export default function BaseDrawer({ email }) {
   const [active, setActive] = useState("events");
+  const [session, setSession] = useState({});
+
+  async function loadSession() {
+    const res = await getSession();
+    setSession(res);
+  }
+
+  useEffect(() => {
+    loadSession();
+  }, []);
+  console.log("Session: ", session);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -62,7 +73,7 @@ export default function BaseDrawer({ email }) {
           <div>
             <div className="flex flex-col justify-items-center items-center mt-8">
               <Image
-                src={nouser}
+                src={session?.user?.image}
                 height="130px"
                 width="130px"
                 layout="fixed"

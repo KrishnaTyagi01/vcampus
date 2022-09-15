@@ -30,7 +30,7 @@ export default function Home() {
 
       {session && (
         <>
-          <BaseDrawer email={session.user.email} />
+          <BaseDrawer email={session.user.email} session={session} />
         </>
       )}
     </>
