@@ -82,8 +82,7 @@ export default function BaseDrawer({ email }) {
               />
 
               <span className="font-roboto font-bold capitalize">
-                Krishna Tyagi
-                {email}
+                {session?.user?.name}
               </span>
               <span className="font-Mono font-extralight text-sm	opacity-50	 capitalize text-[#DCDCDC	]">
                 new delhi, India

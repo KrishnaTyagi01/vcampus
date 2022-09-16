@@ -17,7 +17,6 @@ function EventSection() {
     setEventOpen(false);
   };
 
-  const postNewEvent = async () => {};
   return (
     <>
       <AddEvent eventOpen={eventOpen} handleClose={handleClose} />
@@ -38,7 +37,6 @@ function EventSection() {
         >
           Add New Event
         </Button>
-        <button onClick={() => postNewEvent()}>test</button>
       </div>
 
       <div className="mt-10 ">
