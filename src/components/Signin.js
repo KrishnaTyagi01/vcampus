@@ -20,6 +20,7 @@ import { Typography } from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { signIn } from "next-auth/react";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction=" down" ref={ref} {...props} />;
@@ -41,7 +42,7 @@ export default function SigninDialog({ openSignin, handleSigninClose }) {
             Welcome to vcampus
           </DialogTitle>
           <DialogContentText style={{ marginTop: "-1rem" }}>
-            Join your college community
+            PLEASE LOGIN TO CONTINUE
           </DialogContentText>
         </div>
         <Divider variant="middle" className="mt-8" />
@@ -51,6 +52,7 @@ export default function SigninDialog({ openSignin, handleSigninClose }) {
             variant="contained"
             startIcon={<GoogleIcon />}
             className="w-2/3 py-4 bg-[#db3236] hover:bg-[#db3236]"
+            onClick={() => signIn("google")}
           >
             Google
           </Button>
@@ -58,6 +60,7 @@ export default function SigninDialog({ openSignin, handleSigninClose }) {
             variant="contained"
             startIcon={<GitHubIcon />}
             className="w-2/3 py-4 mt-4 bg-[#333] hover:bg-[#333]"
+            onClick={() => signIn("github")}
           >
             Github
           </Button>
