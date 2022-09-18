@@ -222,8 +222,8 @@ export default function BaseDrawer({ email }) {
         sx={{ flexGrow: 1, p: 3 }}
       >
         {/* bgcolor: "rgb(243 244 246)" */}
-        {/* <EventSection /> */}
-        <ProfilePage />
+        <EventSection />
+        {/* <ProfilePage /> */}
         {/* <MyEventCard /> */}
         {/* <EventsPage /> */}
       </Box>

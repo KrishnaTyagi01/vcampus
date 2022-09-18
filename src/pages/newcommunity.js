@@ -23,13 +23,15 @@ const steps = ["Purpose", "community name", "Description"];
 
 function NewCommunity() {
   const { data: session, status } = useSession();
-
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const [purpose, setPurpose] = useState("");
+  const [comName, setComName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const isStepOptional = (step) => {
-    return step === 1;
-  };
+  // console.log("purpose", purpose);
+  // console.log("comName", comName);
+  // console.log("description", description);
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -37,9 +39,21 @@ function NewCommunity() {
 
   const handleNext = () => {
     let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
+
+    if (activeStep == 0) {
+      if (purpose == "") {
+        // throw error, must select one value
+        return;
+      }
+    }
+
+    if (activeStep == 1) {
+      // check if name is unique, else throw error
+      // return;
+    }
+
+    if (activeStep == 2) {
+      // save community to database
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -48,25 +62,6 @@ function NewCommunity() {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
   };
 
   return (
@@ -109,7 +104,9 @@ function NewCommunity() {
               </div>
               <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Box sx={{ flex: "1 1 auto" }} />
-                <Button onClick={handleReset}>Go to Dashboard</Button>
+                <Link href="/">
+                  <Button>Go to Dashboard</Button>
+                </Link>
               </Box>
             </React.Fragment>
           ) : (
@@ -146,7 +143,14 @@ function NewCommunity() {
                             <Typography id="font-roboto">For clubs </Typography>
                           </AccordionDetails>
                         </Accordion>
-                        <Checkbox color="success" />
+                        <Checkbox
+                          color="success"
+                          onChange={() => {
+                            if (purpose == "clubs") setPurpose("");
+                            else setPurpose("clubs");
+                          }}
+                          checked={purpose == "clubs"}
+                        />
                       </div>
                       <div className="flex w-full justify-between items-center">
                         <Accordion
@@ -177,7 +181,14 @@ function NewCommunity() {
                             <Typography id="font-roboto">Official </Typography>
                           </AccordionDetails>
                         </Accordion>
-                        <Checkbox color="success" />
+                        <Checkbox
+                          color="success"
+                          onChange={() => {
+                            if (purpose == "official") setPurpose("");
+                            else setPurpose("official");
+                          }}
+                          checked={purpose == "official"}
+                        />
                       </div>
                     </div>
                   </>
@@ -193,8 +204,8 @@ function NewCommunity() {
                       <TextField
                         id="fullWidth"
                         placeholder="Give a unique name to your community"
-                        // onChange={handleChange("fullName")}
-                        // value={fullName}
+                        onChange={(e) => setComName(e.target.value)}
+                        value={comName}
                         style={{ width: "60%", borderRadius: "50%" }}
                         variant="outlined"
                       />
@@ -210,6 +221,8 @@ function NewCommunity() {
                     <TextField
                       id="outlined-multiline-static"
                       label="description"
+                      onChange={(e) => setDescription(e.target.value)}
+                      value={description}
                       multiline
                       rows={4}
                       className="w-full mt-6"

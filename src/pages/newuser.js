@@ -7,8 +7,12 @@ import ChooseCollegeForm from "./../components/profile/ChooseCollege";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Autocomplete from "@mui/material/Autocomplete";
+import { getAllCommunities } from "./../helpers/index";
+import axios from "axios";
 
-function NewUserProfile() {
+function NewUserProfile({ communityList }) {
+  console.log("communityList", communityList);
+
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState({
     fullName: "",
@@ -135,7 +139,7 @@ function NewUserProfile() {
           />
         </div>
         <div className="px-4 py-4 flex justify-between items-center">
-          <Typography>college</Typography>
+          <Typography>Community</Typography>
           <Autocomplete
             disablePortal
             options={top100Films}
@@ -154,7 +158,7 @@ function NewUserProfile() {
             </span>
             <span className="font-kanit">
               <Link
-                href="#"
+                href="/newcommunity"
                 className="text-primary font-kanit decoration-solid"
               >
                 {/* <span className=""> */}
@@ -177,6 +181,20 @@ function NewUserProfile() {
       </Container>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const communityList = await axios.get(
+    `${process.env.BASE_URL}/getAllCommunities`
+  );
+  console.log("communityList", communityList.data);
+
+  return {
+    props: {
+      // communityList: JSON.parse(stringify(communityList.data)),
+      communityList: communityList.data,
+    }, // will be passed to the page component as props
+  };
 }
 
 const top100Films = [
