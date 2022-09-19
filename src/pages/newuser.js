@@ -10,12 +10,16 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { getAllCommunities } from "./../helpers/index";
 import axios from "axios";
 
+const BASE = process.env.REACT_APP_BASE_URL;
+
 function NewUserProfile({ communityList }) {
   console.log("communityList", communityList);
 
+  const commList = communityList;
+
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState({
-    fullName: "",
+    name: "",
     email: "",
     image: nouser,
     phone: "",
@@ -24,15 +28,15 @@ function NewUserProfile({ communityList }) {
   });
 
   console.log("values: ", values);
-  const { fullName, email, image, phone, college, roll } = values;
+  const { name, email, image, phone, college, roll } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (
-      fullName.length < 1 ||
+      name.length < 1 ||
       email.length < 1 ||
       roll.length < 1 ||
       college.length < 1
@@ -40,6 +44,17 @@ function NewUserProfile({ communityList }) {
       console.log("Fields can't be empty");
       return;
     }
+    // http://localhost:8000/api/updateuser
+    const res = await axios.post(` http://localhost:8000/api/updateuser`, {
+      name,
+      email,
+      image,
+      phone,
+      college,
+      roll,
+    });
+
+    console.log(res);
   };
 
   const { data: session, status } = useSession();
@@ -47,7 +62,7 @@ function NewUserProfile({ communityList }) {
   useEffect(() => {
     setValues({
       ...values,
-      fullName: session?.user.name,
+      name: session?.user.name,
       email: session?.user.email,
       image: session?.user.image,
     });
@@ -112,8 +127,8 @@ function NewUserProfile({ communityList }) {
           <Typography>Full Name</Typography>
           <TextField
             id="fullWidth"
-            onChange={handleChange("fullName")}
-            value={fullName}
+            onChange={handleChange("name")}
+            value={name}
             style={{ width: "60%", borderRadius: "50%" }}
             variant="outlined"
           />
@@ -142,7 +157,10 @@ function NewUserProfile({ communityList }) {
           <Typography>Community</Typography>
           <Autocomplete
             disablePortal
-            options={top100Films}
+            options={
+              communityList ? communityList : [{ label: "loading", id: 0 }]
+            }
+            getOptionLabel={(option) => option.communityName}
             onSelect={handleChange("college")}
             sx={{ width: "60%" }}
             renderInput={(params) => (
@@ -185,30 +203,31 @@ function NewUserProfile({ communityList }) {
 
 export async function getServerSideProps(context) {
   const communityList = await axios.get(
-    `${process.env.BASE_URL}/getAllCommunities`
+    `${process.env.REACT_APP_BASE_URL}/getAllCommunities`
   );
-  console.log("communityList", communityList.data);
+
+  // const communityList = getAllCommunities();
 
   return {
     props: {
       // communityList: JSON.parse(stringify(communityList.data)),
-      communityList: communityList.data,
+      communityList: communityList.data.communities,
     }, // will be passed to the page component as props
   };
 }
 
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: "Pulp Fiction", year: 1994 },
-  {
-    label: "The Lord of the Rings: The Return of the King",
-    year: 2003,
-  },
-];
+// const top100Films = [
+//   { label: "The Shawshank Redemption", year: 1994 },
+//   { label: "The Godfather", year: 1972 },
+//   { label: "The Godfather: Part II", year: 1974 },
+//   { label: "The Dark Knight", year: 2008 },
+//   { label: "12 Angry Men", year: 1957 },
+//   { label: "Schindler's List", year: 1993 },
+//   { label: "Pulp Fiction", year: 1994 },
+//   {
+//     label: "The Lord of the Rings: The Return of the King",
+//     year: 2003,
+//   },
+// ];
 
 export default NewUserProfile;
