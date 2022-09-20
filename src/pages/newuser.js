@@ -45,7 +45,7 @@ function NewUserProfile({ communityList }) {
       return;
     }
     // http://localhost:8000/api/updateuser
-    const res = await axios.post(` http://localhost:8000/api/updateuser`, {
+    const res = await axios.post(`http://localhost:8000/api/updateuser`, {
       name,
       email,
       image,
@@ -53,6 +53,12 @@ function NewUserProfile({ communityList }) {
       college,
       roll,
     });
+
+    if (res.status == 200) {
+      //redirect to dashboard
+    } else {
+      // display the error
+    }
 
     console.log(res);
   };

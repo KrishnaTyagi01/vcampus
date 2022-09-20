@@ -146,10 +146,10 @@ export default function BaseDrawer({ email }) {
 
               <ListItem
                 disablePadding
-                onClick={() => setActive("Profile")}
+                onClick={() => setActive("profile")}
                 style={{ marginBottom: ".5rem" }}
                 className={
-                  active === "Profile"
+                  active === "profile"
                     ? "text-[#3f51b5] font-bold text-3xl"
                     : ""
                 }
@@ -157,12 +157,12 @@ export default function BaseDrawer({ email }) {
                 <ListItemButton>
                   <ListItemIcon>
                     <ManageAccountsIcon
-                      style={active === "Profile" ? { color: "#3f51b5" } : {}}
+                      style={active === "profile" ? { color: "#3f51b5" } : {}}
                     />
                   </ListItemIcon>
                   <span
                     className={
-                      active === "Profile"
+                      active === "profile"
                         ? "font-roboto text-base capitalize "
                         : "text-base capitalize"
                     }
@@ -222,7 +222,13 @@ export default function BaseDrawer({ email }) {
         sx={{ flexGrow: 1, p: 3 }}
       >
         {/* bgcolor: "rgb(243 244 246)" */}
-        <EventSection />
+        {active == "events" && <EventSection />}
+        {/* {active == 'cafe' && (
+          <ProfilePage />
+
+        )} */}
+        {active == "profile" && <ProfilePage />}
+        {active == "myevents" && <MyEventCard />}
         {/* <ProfilePage /> */}
         {/* <MyEventCard /> */}
         {/* <EventsPage /> */}

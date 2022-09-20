@@ -17,11 +17,63 @@ import ChipsArray from "./chipArray";
 export default function AddEvent({ eventOpen, handleClose }) {
   const [dateval, setDateval] = React.useState(dayjs("2014-08-18T21:11:54"));
 
+  const [values, setValues] = useState({
+    eventName: "",
+    lastRegistrationDate: "",
+  });
+
+  const [checkedValues, setCheckedValues] = useState({
+    namereq: false,
+    phonereq: false,
+    rollnoreq: false,
+    emailreq: false,
+    yearreq: false,
+    sectionreq: false,
+    deptreq: false,
+  });
+
+  const { eventName, lastRegistrationDate } = values;
+
+  const {
+    namereq,
+    phonereq,
+    rollnoreq,
+    emailreq,
+    yearreq,
+    sectionreq,
+    deptreq,
+  } = checkedValues;
+
+  const setToDefault = () => {
+    setCheckedValues({
+      namereq: false,
+      phonereq: false,
+      rollnoreq: false,
+      emailreq: false,
+      yearreq: false,
+      sectionreq: false,
+      deptreq: false,
+    });
+  };
+
+  console.log("checkedValues", checkedValues);
+
   const handleDateChange = (newValue) => {
+    setValues({ ...values, lastRegistrationDate: newValue });
     setDateval(newValue);
   };
+
+  const handleTextChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+  };
+
+  const handleCheckedValues = (name) => (event) => {
+    setCheckedValues({ ...checkedValues, [name]: event.target.checked });
+  };
   const [detailsName, setDetailName] = useState("");
-  const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState([]); //contains all the extraDetails needed from user
+
+  // console.log("details: ", details);
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
@@ -47,7 +99,9 @@ export default function AddEvent({ eventOpen, handleClose }) {
             label="Event Name"
             type="text"
             fullWidth
+            value={eventName}
             variant="standard"
+            onChange={handleTextChange("eventName")}
             style={{ marginBottom: "2rem" }}
           />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -65,33 +119,68 @@ export default function AddEvent({ eventOpen, handleClose }) {
           <FormGroup style={{}}>
             <div>
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={
+                  <Checkbox
+                    checked={namereq}
+                    onChange={handleCheckedValues("namereq")}
+                  />
+                }
                 label="Name"
               />
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={
+                  <Checkbox
+                    checked={namereq}
+                    onChange={handleCheckedValues("phonereq")}
+                  />
+                }
                 label="phone no."
               />
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={
+                  <Checkbox
+                    checked={rollnoreq}
+                    onChange={handleCheckedValues("rollnoreq")}
+                  />
+                }
                 label="roll no."
               />
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={
+                  <Checkbox
+                    checked={emailreq}
+                    onChange={handleCheckedValues("emailreq")}
+                  />
+                }
                 label="email"
               />
             </div>
             <div>
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={
+                  <Checkbox
+                    checked={yearreq}
+                    onChange={handleCheckedValues("yearreq")}
+                  />
+                }
                 label="Year"
               />
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={
+                  <Checkbox
+                    checked={sectionreq}
+                    onChange={handleCheckedValues("sectionreq")}
+                  />
+                }
                 label="Section"
               />
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={
+                  <Checkbox
+                    checked={deptreq}
+                    onChange={handleCheckedValues("deptreq")}
+                  />
+                }
                 label="Department"
               />
             </div>
@@ -116,7 +205,14 @@ export default function AddEvent({ eventOpen, handleClose }) {
           <ChipsArray details={details} setDetails={setDetails} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            onClick={() => {
+              setToDefault();
+              handleClose();
+            }}
+          >
+            Cancel
+          </Button>
           <Button onClick={handleClose}>submit</Button>
         </DialogActions>
       </Dialog>
