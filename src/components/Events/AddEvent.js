@@ -13,13 +13,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel, FormGroup, Typography } from "@mui/material";
 import ChipsArray from "./chipArray";
+import axios from "axios";
 
 export default function AddEvent({ eventOpen, handleClose }) {
-  const [dateval, setDateval] = React.useState(dayjs("2014-08-18T21:11:54"));
+  const [dateval, setDateval] = React.useState(undefined);
 
   const [values, setValues] = useState({
     eventName: "",
-    lastRegistrationDate: "",
+    lastRegistrationDate: dayjs("2022-08-18T21:11:54"),
   });
 
   const [checkedValues, setCheckedValues] = useState({
@@ -33,7 +34,7 @@ export default function AddEvent({ eventOpen, handleClose }) {
   });
 
   const { eventName, lastRegistrationDate } = values;
-
+  console.log("reg date: ", lastRegistrationDate);
   const {
     namereq,
     phonereq,
@@ -56,7 +57,7 @@ export default function AddEvent({ eventOpen, handleClose }) {
     });
   };
 
-  console.log("checkedValues", checkedValues);
+  // console.log("checkedValues", checkedValues);
 
   const handleDateChange = (newValue) => {
     setValues({ ...values, lastRegistrationDate: newValue });
@@ -73,7 +74,7 @@ export default function AddEvent({ eventOpen, handleClose }) {
   const [detailsName, setDetailName] = useState("");
   const [details, setDetails] = useState([]); //contains all the extraDetails needed from user
 
-  // console.log("details: ", details);
+  console.log("details: ", details);
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
@@ -82,6 +83,30 @@ export default function AddEvent({ eventOpen, handleClose }) {
 
       setDetailName("");
     }
+  };
+
+  const handleSubmit = async () => {
+    if (eventName.length < 3) {
+      console.log("The lenght of eventName must be greater than 3");
+      return;
+    }
+
+    const res = await axios.post("http://localhost:8000/api/newevent", {
+      eventName,
+      lastRegistrationDate,
+      checkedValues,
+      otherDetails: details,
+    });
+
+    if (res.status == 200) {
+      console.log("Event registered successfully");
+      handleClose();
+    } else {
+      // show the error statement
+      console.log("error: ", res.error);
+    }
+
+    console.log("on event save: ", res);
   };
 
   return (
@@ -130,7 +155,7 @@ export default function AddEvent({ eventOpen, handleClose }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={namereq}
+                    checked={phonereq}
                     onChange={handleCheckedValues("phonereq")}
                   />
                 }
@@ -213,7 +238,7 @@ export default function AddEvent({ eventOpen, handleClose }) {
           >
             Cancel
           </Button>
-          <Button onClick={handleClose}>submit</Button>
+          <Button onClick={() => handleSubmit()}>submit</Button>
         </DialogActions>
       </Dialog>
     </div>
