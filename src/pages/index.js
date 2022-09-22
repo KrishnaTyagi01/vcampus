@@ -11,6 +11,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import BaseDrawer from "./../components/main/BaseDrawer";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const { data: session, status } = useSession();

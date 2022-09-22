@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import BasicCard from "./Card";
 import AddEvent from "./AddEvent";
+import { ToastContainer } from "react-toastify";
 
 function EventSection() {
   const [eventOpen, setEventOpen] = React.useState(false);
@@ -19,6 +20,17 @@ function EventSection() {
 
   return (
     <>
+      {/* <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      /> */}
       <AddEvent eventOpen={eventOpen} handleClose={handleClose} />
       <div className="flex justify-between">
         <Autocomplete

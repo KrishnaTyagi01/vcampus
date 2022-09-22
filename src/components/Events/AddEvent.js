@@ -14,14 +14,17 @@ import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel, FormGroup, Typography } from "@mui/material";
 import ChipsArray from "./chipArray";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function AddEvent({ eventOpen, handleClose }) {
-  const [dateval, setDateval] = React.useState(undefined);
-
   const [values, setValues] = useState({
     eventName: "",
-    lastRegistrationDate: dayjs("2022-08-18T21:11:54"),
+    lastRegistrationDate: null,
+    eventDetails: "",
   });
+
+  const [detailsName, setDetailName] = useState("");
+  const [details, setDetails] = useState([]); //contains all the extraDetails needed from user
 
   const [checkedValues, setCheckedValues] = useState({
     namereq: false,
@@ -33,8 +36,8 @@ export default function AddEvent({ eventOpen, handleClose }) {
     deptreq: false,
   });
 
-  const { eventName, lastRegistrationDate } = values;
-  console.log("reg date: ", lastRegistrationDate);
+  const { eventName, lastRegistrationDate, eventDetails } = values;
+
   const {
     namereq,
     phonereq,
@@ -55,13 +58,21 @@ export default function AddEvent({ eventOpen, handleClose }) {
       sectionreq: false,
       deptreq: false,
     });
+
+    setValues({
+      eventName: "",
+      lastRegistrationDate: null,
+      eventDetails: "",
+    });
+
+    setDetails([]);
+    setDetailName("");
   };
 
   // console.log("checkedValues", checkedValues);
 
   const handleDateChange = (newValue) => {
     setValues({ ...values, lastRegistrationDate: newValue });
-    setDateval(newValue);
   };
 
   const handleTextChange = (name) => (event) => {
@@ -71,10 +82,6 @@ export default function AddEvent({ eventOpen, handleClose }) {
   const handleCheckedValues = (name) => (event) => {
     setCheckedValues({ ...checkedValues, [name]: event.target.checked });
   };
-  const [detailsName, setDetailName] = useState("");
-  const [details, setDetails] = useState([]); //contains all the extraDetails needed from user
-
-  console.log("details: ", details);
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
@@ -86,31 +93,71 @@ export default function AddEvent({ eventOpen, handleClose }) {
   };
 
   const handleSubmit = async () => {
-    if (eventName.length < 3) {
-      console.log("The lenght of eventName must be greater than 3");
+    if (eventName === null || eventName.length < 3) {
+      toast.error("Event Name should contain more than 3 characters", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    if (lastRegistrationDate === null) {
+      toast.error("Choose a last registration date", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return;
     }
 
     const res = await axios.post("http://localhost:8000/api/newevent", {
       eventName,
       lastRegistrationDate,
+      eventDetails,
       checkedValues,
       otherDetails: details,
     });
 
     if (res.status == 200) {
       console.log("Event registered successfully");
+      toast.success("Event registered successfully", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       handleClose();
     } else {
       // show the error statement
+      toast.error(`${res.error}`, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       console.log("error: ", res.error);
     }
-
-    console.log("on event save: ", res);
   };
 
   return (
     <div>
+      {/* Same as */}
+      <ToastContainer />
       <Dialog open={eventOpen} onClose={handleClose}>
         <DialogTitle>Add New Event</DialogTitle>
         <DialogContent>
@@ -129,11 +176,21 @@ export default function AddEvent({ eventOpen, handleClose }) {
             onChange={handleTextChange("eventName")}
             style={{ marginBottom: "2rem" }}
           />
+          <TextField
+            id="outlined-multiline-static"
+            label="Event Details"
+            value={eventDetails}
+            onChange={handleTextChange("eventDetails")}
+            fullWidth
+            multiline
+            style={{ marginBottom: "2rem" }}
+            rows={3}
+          />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
               label="Last Registration Date"
               inputFormat="MM/DD/YYYY"
-              value={dateval}
+              value={lastRegistrationDate}
               onChange={handleDateChange}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -218,7 +275,6 @@ export default function AddEvent({ eventOpen, handleClose }) {
             value={detailsName}
             onChange={(e) => {
               setDetailName(e.target.value);
-              console.log("skillName: ", detailsName);
             }}
             onKeyDown={handleEnter}
             id="skill"
