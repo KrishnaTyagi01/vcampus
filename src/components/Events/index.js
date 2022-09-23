@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
@@ -6,9 +6,27 @@ import AddIcon from "@mui/icons-material/Add";
 import BasicCard from "./Card";
 import AddEvent from "./AddEvent";
 import { ToastContainer } from "react-toastify";
+import axios from "axios";
+import useSWR from "swr";
 
-function EventSection() {
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+function EventSection({ events }) {
   const [eventOpen, setEventOpen] = React.useState(false);
+  const { data, error } = useSWR(
+    "http://localhost:8000/api/getevents",
+    fetcher
+  );
+  console.log("All Events: ", data);
+
+  // const [events, setEvents] = useState([]);
+
+  // useEffect(async () => {
+  //   const res = await axios.get("http://localhost:8000/api/getevents");
+  //   setEvents(res);
+  // }, []);
+
+  // console.log("events: ", events);
 
   const handleClickOpen = () => {
     setEventOpen(true);
@@ -52,10 +70,9 @@ function EventSection() {
       </div>
 
       <div className="mt-10 ">
-        <BasicCard />
-        <BasicCard />
-        <BasicCard />
-        <BasicCard />
+        {data?.map((event, key) => (
+          <BasicCard key={key} event={event} />
+        ))}
       </div>
     </>
   );

@@ -6,8 +6,12 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import dayjs from "dayjs";
 
-export default function BasicCard() {
+export default function BasicCard({ event }) {
+  const { eventName, lastRegistrationDate } = event;
+  const lastDate = dayjs(`${event?.lastRegistrationDate}`).toString();
+  console.log(event);
   return (
     <Card sx={{ minWidth: 275, mb: "1.2rem" }}>
       <CardContent>
@@ -19,20 +23,20 @@ export default function BasicCard() {
           component="div"
           className=" font-bold font-kanit"
         >
-          Smart India Hackathon
+          {event?.eventName}
         </Typography>
         <Typography
           sx={{ mb: 1, mt: 1.5 }}
           color="text.secondary"
           className="text-sm opacity-70 capitalize"
         >
-          Registration dates
+          Last Registration dates
         </Typography>
         <Typography>
           <span className="flex items-center">
             <CalendarTodayIcon className="text-primary w-4z" />
             <span className="text-sm font-bold ml-2 opacity-90 capitalize font-roboto">
-              sep 4,2022 - sep 12,2022
+              {lastDate}
             </span>
           </span>
         </Typography>
@@ -43,11 +47,7 @@ export default function BasicCard() {
         >
           Details
         </Typography>
-        <Typography className="text-sm  ">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum
-          explicabo fugiat facere, cum suscipit quam dolores sed dolor? Repellat
-          neque sed facilis. Fuga et natus incidunt, vel nostrum ipsa debitis.
-        </Typography>
+        <Typography className="text-sm  ">{event?.eventDetails}</Typography>
       </CardContent>
       <CardActions className="flex justify-end mb-3">
         <div className="mr-12">
