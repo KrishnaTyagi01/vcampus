@@ -38,42 +38,35 @@ function EventSection({ events }) {
 
   return (
     <>
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      /> */}
-      <AddEvent eventOpen={eventOpen} handleClose={handleClose} />
-      <div className="flex justify-between">
-        <Autocomplete
-          disablePortal
-          options={top100Films}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Search Events" />
-          )}
-          className="bg-white rounded-2xl outline-hidden"
-        />
-        <Button
-          startIcon={<AddIcon />}
-          onClick={handleClickOpen}
-          className="py-2 px-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-[#fff] outline-none border-none rounded-2xl capitalize"
-        >
-          Add New Event
-        </Button>
-      </div>
+      {data && (
+        <>
+          <AddEvent eventOpen={eventOpen} handleClose={handleClose} />
+          <div className="flex justify-between">
+            <Autocomplete
+              disablePortal
+              options={top100Films}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Search Events" />
+              )}
+              className="bg-white rounded-2xl outline-hidden"
+            />
+            <Button
+              startIcon={<AddIcon />}
+              onClick={handleClickOpen}
+              className="py-2 px-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-[#fff] outline-none border-none rounded-2xl capitalize"
+            >
+              Add New Event
+            </Button>
+          </div>
 
-      <div className="mt-10 ">
-        {data?.map((event, key) => (
-          <BasicCard key={key} event={event} />
-        ))}
-      </div>
+          <div className="mt-10 ">
+            {data?.map((event, key) => (
+              <BasicCard key={key} event={event} />
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 }
