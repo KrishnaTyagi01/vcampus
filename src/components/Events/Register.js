@@ -7,6 +7,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Typography } from "@mui/material";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function Register({ openRegister, handleClose, event }) {
   const {
@@ -23,6 +26,12 @@ function Register({ openRegister, handleClose, event }) {
     otherDetails,
   } = event;
 
+  console.log("otherDetails", otherDetails);
+  const { data: session, status } = useSession();
+
+  const username = session?.user.email;
+
+  // console.log("Session Data: ", session);
   const [values, setValues] = useState({
     name: "",
     phone: "",
@@ -57,8 +66,101 @@ function Register({ openRegister, handleClose, event }) {
     setExtra({});
   };
 
-  //   console.log("extra: ", extra);
-  console.log("values: ", values);
+  console.log("extra: ", extra);
+  // console.log("values: ", values);
+
+  const handleRegister = async () => {
+    if (namereq && name.length < 3) {
+      toast.error("Name should contain more than 2 characters", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    if (phonereq && phone.length != 10) {
+      toast.error("Phone no should contain 10 digits", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (emailreq && !email.includes("@")) {
+      toast.error("Enter a valid email", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (
+      (rollnoreq && roll.length < 1) ||
+      (yearreq && year.length < 1) ||
+      (deptreq && dept.length < 1)
+    ) {
+      toast.error("Please Enter all the details", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    const res = await axios.post("http://localhost:8000/api/register", {
+      event: event._id,
+      username: username,
+      name,
+      phone,
+      roll,
+      email,
+      year,
+      section,
+      dept,
+      otherDetails: extra,
+    });
+
+    if (res.status == 200) {
+      toast.success("Registration completed", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      handleClose();
+    } else {
+      toast.error(`${res.data.error}`, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    console.log("registration res: ", res);
+  };
   return (
     <>
       <Dialog open={openRegister} onClose={handleClose}>
@@ -76,7 +178,7 @@ function Register({ openRegister, handleClose, event }) {
           >
             Event Details
           </Typography>
-          <Typography className="text-sm  ">{event.eventDetails}</Typography>
+          <Typography className="text-sm  ">{eventDetails}</Typography>
           {namereq && (
             <TextField
               autoFocus
@@ -187,7 +289,7 @@ function Register({ openRegister, handleClose, event }) {
           >
             Cancel
           </Button>
-          <Button onClick={handleClose}>Register</Button>
+          <Button onClick={handleRegister}>Register</Button>
         </DialogActions>
       </Dialog>
     </>

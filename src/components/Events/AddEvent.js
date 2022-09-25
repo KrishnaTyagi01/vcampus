@@ -15,6 +15,7 @@ import { FormControlLabel, FormGroup, Typography } from "@mui/material";
 import ChipsArray from "./chipArray";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 export default function AddEvent({ eventOpen, handleClose }) {
   const [values, setValues] = useState({
@@ -128,8 +129,7 @@ export default function AddEvent({ eventOpen, handleClose }) {
     });
 
     if (res.status == 200) {
-      console.log("Event registered successfully");
-      toast.success("Event registered successfully", {
+      toast.success("Event Added successfully", {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
