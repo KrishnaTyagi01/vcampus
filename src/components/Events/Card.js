@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -8,11 +8,26 @@ import Typography from "@mui/material/Typography";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import dayjs from "dayjs";
 import Register from "./Register";
+import { useSession } from "next-auth/react";
 
-export default function BasicCard({ event }) {
+export default function BasicCard({ event, allRegistrations }) {
   const { eventName } = event;
+  const { data: session, status } = useSession();
   const lastDate = dayjs(`${event.lastRegistrationDate}`).toString();
   // console.log("Event id :", event._id);
+  const [registered, setRegistered] = useState(false);
+
+  useEffect(() => {
+    for (let i = 0; i < allRegistrations.length; i++) {
+      console.log("event id", allRegistrations[i].event);
+      if (
+        allRegistrations[i].event == event._id &&
+        allRegistrations[i].username == session.user.email
+      ) {
+        setRegistered(true);
+      }
+    }
+  }, []);
 
   const [openRegister, setOpenRegister] = React.useState(false);
 
@@ -80,15 +95,27 @@ export default function BasicCard({ event }) {
                 >
                   <span className="text-primary">Learn More</span>
                 </Button> */}
-                <Button
-                  variant="outlined"
-                  className="ml-4 border-primary"
-                  size="medium"
-                >
-                  <span className="text-primary" onClick={handleClickOpen}>
-                    Register
-                  </span>
-                </Button>
+                {!registered && (
+                  <Button
+                    variant="outlined"
+                    className="ml-4 border-primary"
+                    size="medium"
+                  >
+                    <span className="text-primary" onClick={handleClickOpen}>
+                      Register
+                    </span>
+                  </Button>
+                )}
+                {registered && (
+                  <Button
+                    variant="outlined"
+                    className="ml-4 border-primary"
+                    size="medium"
+                    disabled
+                  >
+                    <span className="text-primary">Registered</span>
+                  </Button>
+                )}
               </div>
             </CardActions>
           </Card>

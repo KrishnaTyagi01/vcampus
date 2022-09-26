@@ -11,13 +11,13 @@ import useSWR from "swr";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-function EventSection({ events }) {
+function EventSection({ events, allRegistrations }) {
   const [eventOpen, setEventOpen] = React.useState(false);
   const { data, error } = useSWR(
     "http://localhost:8000/api/getevents",
     fetcher
   );
-  console.log("All Events: ", data);
+  console.log("All Registrations: ", allRegistrations);
 
   // const [events, setEvents] = useState([]);
 
@@ -62,7 +62,11 @@ function EventSection({ events }) {
 
           <div className="mt-10 ">
             {data?.map((event, key) => (
-              <BasicCard key={key} event={event} />
+              <BasicCard
+                key={key}
+                event={event}
+                allRegistrations={allRegistrations}
+              />
             ))}
           </div>
         </>

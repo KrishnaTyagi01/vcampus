@@ -13,7 +13,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import BaseDrawer from "./../components/main/BaseDrawer";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Home() {
+export default function Home({ allRegistrations }) {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   //11:35
@@ -31,9 +31,23 @@ export default function Home() {
 
       {session && (
         <>
-          <BaseDrawer email={session.user.email} session={session} />
+          <BaseDrawer
+            allRegistrations={allRegistrations}
+            email={session.user.email}
+            session={session}
+          />
         </>
       )}
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const res = await axios.get("http://localhost:8000/api/getallregistrations");
+
+  return {
+    props: {
+      allRegistrations: res.data,
+    }, // will be passed to the page component as props
+  };
 }

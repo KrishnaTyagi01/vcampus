@@ -28,7 +28,7 @@ import EventsPage from "../MyEvents";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
 const drawerWidth = 300;
 
-export default function BaseDrawer({ email }) {
+export default function BaseDrawer({ email, allRegistrations }) {
   const [active, setActive] = useState("events");
   const [session, setSession] = useState({});
 
@@ -222,13 +222,17 @@ export default function BaseDrawer({ email }) {
         sx={{ flexGrow: 1, p: 3 }}
       >
         {/* bgcolor: "rgb(243 244 246)" */}
-        {active == "events" && <EventSection />}
+        {active == "events" && (
+          <EventSection allRegistrations={allRegistrations} />
+        )}
         {/* {active == 'cafe' && (
           <ProfilePage />
 
         )} */}
         {active == "profile" && <ProfilePage />}
-        {active == "myevents" && <MyEventCard />}
+        {active == "myevents" && (
+          <MyEventCard allRegistrations={allRegistrations} />
+        )}
         {/* <ProfilePage /> */}
         {/* <MyEventCard /> */}
         {/* <EventsPage /> */}

@@ -26,7 +26,7 @@ function Register({ openRegister, handleClose, event }) {
     otherDetails,
   } = event;
 
-  console.log("otherDetails", otherDetails);
+  // console.log("otherDetails", otherDetails);
   const { data: session, status } = useSession();
 
   const username = session?.user.email;
@@ -66,7 +66,7 @@ function Register({ openRegister, handleClose, event }) {
     setExtra({});
   };
 
-  console.log("extra: ", extra);
+  // console.log("extra: ", extra);
   // console.log("values: ", values);
 
   const handleRegister = async () => {
@@ -147,6 +147,7 @@ function Register({ openRegister, handleClose, event }) {
         draggable: true,
         progress: undefined,
       });
+      location.reload();
       handleClose();
     } else {
       toast.error(`${res.data.error}`, {
