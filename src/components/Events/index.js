@@ -13,20 +13,14 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function EventSection({ events, allRegistrations }) {
   const [eventOpen, setEventOpen] = React.useState(false);
-  const { data, error } = useSWR(
+
+  const { data, error, mutate } = useSWR(
     "http://localhost:8000/api/getevents",
-    fetcher
+    fetcher,
+    {
+      revalidateIfStale: false,
+    }
   );
-  console.log("All Registrations: ", allRegistrations);
-
-  // const [events, setEvents] = useState([]);
-
-  // useEffect(async () => {
-  //   const res = await axios.get("http://localhost:8000/api/getevents");
-  //   setEvents(res);
-  // }, []);
-
-  // console.log("events: ", events);
 
   const handleClickOpen = () => {
     setEventOpen(true);
@@ -40,7 +34,11 @@ function EventSection({ events, allRegistrations }) {
     <>
       {data && (
         <>
-          <AddEvent eventOpen={eventOpen} handleClose={handleClose} />
+          <AddEvent
+            mutate={mutate}
+            eventOpen={eventOpen}
+            handleClose={handleClose}
+          />
           <div className="flex justify-between">
             <Autocomplete
               disablePortal

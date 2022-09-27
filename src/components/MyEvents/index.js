@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MyEventCard from "./MyEventCard";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
-function EventsPage() {
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+function MyEventsSection() {
+  const { data, error } = useSWR(
+    "http://localhost:8000/api/getevents",
+    fetcher,
+    {
+      revalidateIfStale: false,
+    }
+  );
+  const { data: session, status } = useSession();
+  const [filteredData, setFilteredData] = useState(null);
+
+  useEffect(() => {
+    const filter = data.filter((event) => {
+      if (event.createdBy == session.user.email) return true;
+      else return false;
+    });
+
+    setFilteredData(filter);
+  }, [data]);
+  console.log("filtered data", filteredData);
+  console.log("getting the data:", data);
+
   return (
     <div>
-      <MyEventCard />
-      <MyEventCard />
-      <MyEventCard />
-      <MyEventCard />
-      <MyEventCard />
+      {filteredData && filteredData.map((event, key) => <MyEventCard />)}
     </div>
   );
 }
 
-export default EventsPage;
+export default MyEventsSection;

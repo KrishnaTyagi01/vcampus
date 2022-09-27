@@ -26,6 +26,7 @@ import Button from "@mui/material/Button";
 import MyEventCard from "../MyEvents/MyEventCard";
 import EventsPage from "../MyEvents";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import MyEventsSection from "../MyEvents";
 const drawerWidth = 300;
 
 export default function BaseDrawer({ email, allRegistrations }) {
@@ -225,17 +226,10 @@ export default function BaseDrawer({ email, allRegistrations }) {
         {active == "events" && (
           <EventSection allRegistrations={allRegistrations} />
         )}
-        {/* {active == 'cafe' && (
-          <ProfilePage />
-
-        )} */}
         {active == "profile" && <ProfilePage />}
         {active == "myevents" && (
-          <MyEventCard allRegistrations={allRegistrations} />
+          <MyEventsSection allRegistrations={allRegistrations} />
         )}
-        {/* <ProfilePage /> */}
-        {/* <MyEventCard /> */}
-        {/* <EventsPage /> */}
       </Box>
       <Box style={{ width: "25rem" }} component="main">
         <div>Hellow world</div>

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import dayjs from "dayjs";
-import Register from "./Register";
 import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import Register from "./Register";
 
 export default function BasicCard({ event, allRegistrations }) {
   const { eventName } = event;
@@ -19,7 +19,6 @@ export default function BasicCard({ event, allRegistrations }) {
 
   useEffect(() => {
     for (let i = 0; i < allRegistrations.length; i++) {
-      console.log("event id", allRegistrations[i].event);
       if (
         allRegistrations[i].event == event._id &&
         allRegistrations[i].username == session.user.email
@@ -47,6 +46,7 @@ export default function BasicCard({ event, allRegistrations }) {
             event={event}
             openRegister={openRegister}
             handleClose={handleClose}
+            setRegistered={setRegistered}
           />
           <Card sx={{ minWidth: 275, mb: "1.2rem" }}>
             <CardContent>
@@ -107,14 +107,10 @@ export default function BasicCard({ event, allRegistrations }) {
                   </Button>
                 )}
                 {registered && (
-                  <Button
-                    variant="outlined"
-                    className="ml-4 border-primary"
-                    size="medium"
-                    disabled
-                  >
-                    <span className="text-primary">Registered</span>
-                  </Button>
+                  <span className="py-4 px-4 bg-primary flex justify-center items-center text-white uppercase text-sm rounded-md">
+                    <TaskAltIcon className="mr-2" />
+                    Registered
+                  </span>
                 )}
               </div>
             </CardActions>

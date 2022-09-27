@@ -17,12 +17,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 
-export default function AddEvent({ eventOpen, handleClose }) {
+export default function AddEvent({ eventOpen, handleClose, mutate }) {
   const [values, setValues] = useState({
     eventName: "",
     lastRegistrationDate: null,
     eventDetails: "",
   });
+
+  const { data: session, status } = useSession();
 
   const [detailsName, setDetailName] = useState("");
   const [details, setDetails] = useState([]); //contains all the extraDetails needed from user
@@ -126,6 +128,7 @@ export default function AddEvent({ eventOpen, handleClose }) {
       eventDetails,
       checkedValues,
       otherDetails: details,
+      createdBy: session.user.email,
     });
 
     if (res.status == 200) {
@@ -138,6 +141,7 @@ export default function AddEvent({ eventOpen, handleClose }) {
         draggable: true,
         progress: undefined,
       });
+      mutate();
       handleClose();
     } else {
       // show the error statement
