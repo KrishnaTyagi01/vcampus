@@ -1,27 +1,40 @@
+import React, { useState, useEffect } from "react";
 import BookOnlineOutlinedIcon from "@mui/icons-material/BookOnlineOutlined";
-import * as React from "react";
-import { useTheme } from "@mui/material/styles";
+import DeleteIcon from "@mui/icons-material/Delete";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
+import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
-import Avatar from "@mui/material/Avatar";
-import { green } from "@mui/material/colors";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import CommentIcon from "@mui/icons-material/Comment";
-import DeleteIcon from "@mui/icons-material/Delete";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import Button from "@mui/material/Button";
 import ViewRegistrations from "./ViewRegistrations";
+import dayjs from "dayjs";
 
-export default function MyEventCard() {
+export default function MyEventCard({ event, allRegistrations }) {
   const theme = useTheme();
   const [registration, setRegistration] = React.useState(false);
+  const lastDate = dayjs(`${event.lastRegistrationDate}`).toString();
+  const [registrationcount, setRegistrationCount] = useState(0);
+  // console.log("event id ", event._id);
+  const [entries, setEntries] = React.useState();
+  // console.log("allRegistrations", allRegistrations);
+  const getRegistrations = () => {
+    for (let i = 0; i < allRegistrations.length; i++) {
+      if (event._id == allRegistrations[i].event) {
+        setRegistrationCount(registrationcount + 1);
+        console.log("inside loop");
+        setEntries(allRegistrations[i]);
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    getRegistrations();
+  }, []);
 
   const handleRegOpen = () => {
     setRegistration(true);
@@ -36,6 +49,8 @@ export default function MyEventCard() {
       <ViewRegistrations
         registration={registration}
         handleRegClose={handleRegClose}
+        entries={entries}
+        event={event}
       />
       <Card
         sx={{ display: "flex", justifyContent: "space-between" }}
@@ -52,21 +67,21 @@ export default function MyEventCard() {
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Typography component="div" variant="h5">
-                Live From Space
+                {event.eventName}
               </Typography>
               <Typography
                 variant="subtitle1"
                 color="text.secondary"
                 className="text-base"
               >
-                July 9, 2022
+                {lastDate}
               </Typography>
             </CardContent>
             <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
               <IconButton aria-label="previous">
                 <HowToRegIcon />
               </IconButton>{" "}
-              <span>20</span>
+              <span>{registrationcount}</span>
             </Box>
           </Box>
         </div>

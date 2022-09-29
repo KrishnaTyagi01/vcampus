@@ -8,3 +8,5 @@ export const getAllCommunities = async () => {
 
   return communities;
 };
+
+export const fetcher = (...args) => fetch(...args).then((res) => res.json());

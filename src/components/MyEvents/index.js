@@ -4,12 +4,13 @@ import useSWR from "swr";
 import { useSession } from "next-auth/react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
-function MyEventsSection() {
+
+function MyEventsSection({ allRegistrations }) {
   const { data, error } = useSWR(
     "http://localhost:8000/api/getevents",
     fetcher,
     {
-      revalidateIfStale: false,
+      revalidateIfStale: true,
     }
   );
   const { data: session, status } = useSession();
@@ -28,7 +29,10 @@ function MyEventsSection() {
 
   return (
     <div>
-      {filteredData && filteredData.map((event, key) => <MyEventCard />)}
+      {filteredData &&
+        filteredData.map((event, key) => (
+          <MyEventCard event={event} allRegistrations={allRegistrations} />
+        ))}
     </div>
   );
 }

@@ -38,8 +38,26 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export default function ViewRegistrations({ registration, handleRegClose }) {
+export default function ViewRegistrations({
+  registration,
+  handleRegClose,
+  entries,
+  event,
+}) {
   // const [open, setOpen] = React.useState(false);
+
+  console.log("Event: ", event);
+  const {
+    deptreq,
+    emailreq,
+    eventName,
+    namereq,
+    otherDetails,
+    phonereq,
+    rollnoreq,
+    sectionreq,
+    yearreq,
+  } = event;
 
   return (
     <div>

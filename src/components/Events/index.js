@@ -11,14 +11,14 @@ import useSWR from "swr";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-function EventSection({ events, allRegistrations }) {
+function EventSection({ events, allRegistrations, refreshRegistrations }) {
   const [eventOpen, setEventOpen] = React.useState(false);
 
   const { data, error, mutate } = useSWR(
     "http://localhost:8000/api/getevents",
     fetcher,
     {
-      revalidateIfStale: false,
+      revalidateIfStale: true,
     }
   );
 
@@ -64,6 +64,7 @@ function EventSection({ events, allRegistrations }) {
                 key={key}
                 event={event}
                 allRegistrations={allRegistrations}
+                refreshRegistrations={refreshRegistrations}
               />
             ))}
           </div>

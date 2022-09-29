@@ -1,35 +1,37 @@
-import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
+import ChatIcon from "@mui/icons-material/Chat";
+import EventIcon from "@mui/icons-material/Event";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import nouser from "../../assets/nouser.jpg";
+import Toolbar from "@mui/material/Toolbar";
+import { getSession, signOut } from "next-auth/react";
 import Image from "next/image";
-import EventIcon from "@mui/icons-material/Event";
-import ChatIcon from "@mui/icons-material/Chat";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import NewspaperIcon from "@mui/icons-material/Newspaper";
-import BasicCard from "./../Events/Card";
+import React, { useEffect, useState } from "react";
+import MyEventsSection from "../MyEvents";
 import EventSection from "./../Events/index";
 import ProfilePage from "./../profile/index";
-import Button from "@mui/material/Button";
-import MyEventCard from "../MyEvents/MyEventCard";
-import EventsPage from "../MyEvents";
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
-import MyEventsSection from "../MyEvents";
+import useSWR from "swr";
+import { fetcher } from "../../helpers";
 const drawerWidth = 300;
 
-export default function BaseDrawer({ email, allRegistrations }) {
+export default function BaseDrawer() {
+  const { data, error, mutate } = useSWR(
+    "http://localhost:8000/api/getallregistrations",
+    fetcher,
+    {
+      revalidateIfStale: true,
+    }
+  );
+
   const [active, setActive] = useState("events");
   const [session, setSession] = useState({});
 
@@ -49,13 +51,7 @@ export default function BaseDrawer({ email, allRegistrations }) {
       <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-      >
-        {/* <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Permanent drawer
-          </Typography>
-        </Toolbar> */}
-      </AppBar>
+      ></AppBar>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -223,12 +219,15 @@ export default function BaseDrawer({ email, allRegistrations }) {
         sx={{ flexGrow: 1, p: 3 }}
       >
         {/* bgcolor: "rgb(243 244 246)" */}
-        {active == "events" && (
-          <EventSection allRegistrations={allRegistrations} />
+        {active == "events" && data && (
+          <EventSection allRegistrations={data} refreshRegistrations={mutate} />
         )}
         {active == "profile" && <ProfilePage />}
-        {active == "myevents" && (
-          <MyEventsSection allRegistrations={allRegistrations} />
+        {active == "myevents" && data && (
+          <MyEventsSection
+            allRegistrations={data}
+            refreshRegistrations={mutate}
+          />
         )}
       </Box>
       <Box style={{ width: "25rem" }} component="main">

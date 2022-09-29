@@ -10,7 +10,11 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import Register from "./Register";
 
-export default function BasicCard({ event, allRegistrations }) {
+export default function BasicCard({
+  event,
+  allRegistrations,
+  refreshRegistrations,
+}) {
   const { eventName } = event;
   const { data: session, status } = useSession();
   const lastDate = dayjs(`${event.lastRegistrationDate}`).toString();
@@ -47,6 +51,7 @@ export default function BasicCard({ event, allRegistrations }) {
             openRegister={openRegister}
             handleClose={handleClose}
             setRegistered={setRegistered}
+            refreshRegistrations={refreshRegistrations}
           />
           <Card sx={{ minWidth: 275, mb: "1.2rem" }}>
             <CardContent>

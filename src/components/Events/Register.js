@@ -11,7 +11,13 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-function Register({ openRegister, handleClose, event, setRegistered }) {
+function Register({
+  openRegister,
+  handleClose,
+  event,
+  setRegistered,
+  refreshRegistrations,
+}) {
   const {
     eventName,
     lastRegistrationDate,
@@ -149,6 +155,7 @@ function Register({ openRegister, handleClose, event, setRegistered }) {
       });
       // location.reload();
       setRegistered(true);
+      refreshRegistrations();
       handleClose();
     } else {
       toast.error(`${res.data.error}`, {
