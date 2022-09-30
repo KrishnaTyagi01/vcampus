@@ -22,6 +22,22 @@ function EventSection({ events, allRegistrations, refreshRegistrations }) {
     }
   );
 
+  const [filteredData, setFilteredData] = useState(data);
+
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
+
+  const handleFilterChange = (e) => {
+    let input = e.target.value.toLowerCase();
+
+    const filtered = data.filter((event) => {
+      return event.eventName.toLowerCase().includes(input);
+    });
+
+    setFilteredData(filtered);
+  };
+
   const handleClickOpen = () => {
     setEventOpen(true);
   };
@@ -40,15 +56,15 @@ function EventSection({ events, allRegistrations, refreshRegistrations }) {
             handleClose={handleClose}
           />
           <div className="flex justify-between">
-            <Autocomplete
-              disablePortal
-              options={top100Films}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Search Events" />
-              )}
+            <TextField
+              id="outlined-basic"
+              label="Search Events"
+              variant="outlined"
+              sx={{ width: "40%" }}
+              onChange={(e) => handleFilterChange(e)}
               className="bg-white rounded-2xl outline-hidden"
             />
+
             <Button
               startIcon={<AddIcon />}
               onClick={handleClickOpen}
@@ -59,7 +75,7 @@ function EventSection({ events, allRegistrations, refreshRegistrations }) {
           </div>
 
           <div className="mt-10 ">
-            {data?.map((event, key) => (
+            {filteredData?.map((event, key) => (
               <BasicCard
                 key={key}
                 event={event}

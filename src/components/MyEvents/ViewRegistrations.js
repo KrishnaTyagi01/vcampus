@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useRef } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -88,7 +88,7 @@ export default function ViewRegistrations({
                     otherDetails.map((val, key) => (
                       <TableCell align="right">{val}</TableCell>
                     ))}
-                  <TableCell align="right">Confirm </TableCell>
+                  {/* <TableCell align="right">Confirm </TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -122,14 +122,14 @@ export default function ViewRegistrations({
                           {entry.otherDetails[0][`${detail}`]}
                         </TableCell>
                       ))}
-                    <TableCell align="right">
+                    {/* <TableCell align="right">
                       <Button className=" text-primary border-primary hover:bg-primary/10">
                         Accept
                       </Button>
                       <Button className="border-red-500 text-red-500 hover:bg-red-100/10 hover:border-red-500">
                         Reject
                       </Button>
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>
