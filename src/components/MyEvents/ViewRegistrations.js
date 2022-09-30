@@ -44,9 +44,7 @@ export default function ViewRegistrations({
   entries,
   event,
 }) {
-  // const [open, setOpen] = React.useState(false);
-
-  console.log("Event: ", event);
+  console.log("entries from inside: ", entries);
   const {
     deptreq,
     emailreq,
@@ -59,6 +57,8 @@ export default function ViewRegistrations({
     yearreq,
   } = event;
 
+  console.log("otherDetails", otherDetails);
+
   return (
     <div>
       <Dialog
@@ -67,7 +67,7 @@ export default function ViewRegistrations({
         fullWidth={true}
         maxWidth="lg"
       >
-        <DialogTitle>Event Name</DialogTitle>
+        <DialogTitle>{eventName}</DialogTitle>
         <DialogContent>
           <DialogContentText className="mb-4">
             These are the participants who registered for the given event.
@@ -77,25 +77,51 @@ export default function ViewRegistrations({
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="right">Email</TableCell>
-                  <TableCell align="right">Department</TableCell>
-                  <TableCell align="right">Phone no.</TableCell>
+                  {namereq && <TableCell>Name</TableCell>}
+                  {emailreq && <TableCell align="right">Email</TableCell>}
+                  {deptreq && <TableCell align="right">Department</TableCell>}
+                  {sectionreq && <TableCell align="right">Section</TableCell>}
+                  {phonereq && <TableCell align="right">Phone no.</TableCell>}
+                  {rollnoreq && <TableCell align="right">Roll no.</TableCell>}
+                  {yearreq && <TableCell align="right">Year</TableCell>}
+                  {otherDetails &&
+                    otherDetails.map((val, key) => (
+                      <TableCell align="right">{val}</TableCell>
+                    ))}
                   <TableCell align="right">Confirm </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {entries.map((entry, i) => (
                   <TableRow
-                    key={row.name}
+                    key={i}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row">
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
+                    {namereq && <TableCell>{entry.name}</TableCell>}
+                    {emailreq && (
+                      <TableCell align="right">{entry.email}</TableCell>
+                    )}
+                    {deptreq && (
+                      <TableCell align="right">{entry.dept}</TableCell>
+                    )}
+                    {sectionreq && (
+                      <TableCell align="right">{entry.section}</TableCell>
+                    )}
+                    {phonereq && (
+                      <TableCell align="right">{entry.phone}</TableCell>
+                    )}
+                    {rollnoreq && (
+                      <TableCell align="right">{entry.roll}</TableCell>
+                    )}
+                    {yearreq && (
+                      <TableCell align="right">{entry.year}</TableCell>
+                    )}
+                    {otherDetails &&
+                      otherDetails.map((detail, key) => (
+                        <TableCell align="right">
+                          {entry.otherDetails[0][`${detail}`]}
+                        </TableCell>
+                      ))}
                     <TableCell align="right">
                       <Button className=" text-primary border-primary hover:bg-primary/10">
                         Accept

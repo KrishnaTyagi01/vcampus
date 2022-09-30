@@ -19,21 +19,27 @@ export default function MyEventCard({ event, allRegistrations }) {
   const [registration, setRegistration] = React.useState(false);
   const lastDate = dayjs(`${event.lastRegistrationDate}`).toString();
   const [registrationcount, setRegistrationCount] = useState(0);
-  // console.log("event id ", event._id);
-  const [entries, setEntries] = React.useState();
-  // console.log("allRegistrations", allRegistrations);
+
+  const [entries, setEntries] = React.useState([]);
+
+  // var registrationcount = 0;
+
   const getRegistrations = () => {
-    for (let i = 0; i < allRegistrations.length; i++) {
-      if (event._id == allRegistrations[i].event) {
-        setRegistrationCount(registrationcount + 1);
-        console.log("inside loop");
-        setEntries(allRegistrations[i]);
+    for (let value of allRegistrations) {
+      if (event._id == value.event) {
+        let count = registrationcount + 1;
+        setRegistrationCount(count);
+        registrationcount++;
+        setEntries((oldVal) => [...oldVal, value]);
       }
     }
   };
+  // console.log("count", registrationcount);
+  // console.log("entries", entries);
 
   React.useEffect(() => {
     getRegistrations();
+    // console.log("Running useEffect");
   }, []);
 
   const handleRegOpen = () => {
@@ -93,14 +99,16 @@ export default function MyEventCard({ event, allRegistrations }) {
           >
             Delete
           </Button>
-          <Button
-            variant="contained"
-            endIcon={<VisibilityIcon />}
-            onClick={handleRegOpen}
-            className="mb-4 mr-4 bg-primary hover:bg-primary"
-          >
-            View Participants
-          </Button>
+          {entries && (
+            <Button
+              variant="contained"
+              endIcon={<VisibilityIcon />}
+              onClick={handleRegOpen}
+              className="mb-4 mr-4 bg-primary hover:bg-primary"
+            >
+              View Participants
+            </Button>
+          )}
         </div>
       </Card>
     </>
