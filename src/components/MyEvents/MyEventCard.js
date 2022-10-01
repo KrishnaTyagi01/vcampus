@@ -13,8 +13,10 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import ViewRegistrations from "./ViewRegistrations";
 import dayjs from "dayjs";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export default function MyEventCard({ event, allRegistrations }) {
+export default function MyEventCard({ event, allRegistrations, refreshData }) {
   const theme = useTheme();
   const [registration, setRegistration] = React.useState(false);
   const lastDate = dayjs(`${event.lastRegistrationDate}`).toString();
@@ -32,6 +34,37 @@ export default function MyEventCard({ event, allRegistrations }) {
         registrationcount++;
         setEntries((oldVal) => [...oldVal, value]);
       }
+    }
+  };
+
+  const handleDelete = async () => {
+    const resp = await axios.post("http://localhost:8000/api/deleteevent", {
+      eventId: event._id,
+    });
+
+    if (resp.status == 200) {
+      toast.success("Event Deleted successfully", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      console.log("delete: ", resp);
+      refreshData();
+    } else {
+      toast.error(`${resp.data.error}`, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   // console.log("count", registrationcount);
@@ -95,6 +128,7 @@ export default function MyEventCard({ event, allRegistrations }) {
           <Button
             variant="outlined"
             startIcon={<DeleteIcon />}
+            onClick={() => handleDelete()}
             className="mt-4 mr-4 border-red-500 text-red-500 hover:bg-red-100/10 hover:border-red-500"
           >
             Delete

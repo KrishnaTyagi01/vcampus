@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import MyEventCard from "./MyEventCard";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
+import { ToastContainer } from "react-toastify";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function MyEventsSection({ allRegistrations }) {
-  const { data, error } = useSWR(
+  const { data, error, mutate } = useSWR(
     "http://localhost:8000/api/getevents",
     fetcher,
     {
@@ -29,9 +30,15 @@ function MyEventsSection({ allRegistrations }) {
 
   return (
     <div>
+      <ToastContainer />
+
       {filteredData &&
         filteredData.map((event, key) => (
-          <MyEventCard event={event} allRegistrations={allRegistrations} />
+          <MyEventCard
+            event={event}
+            allRegistrations={allRegistrations}
+            refreshData={mutate}
+          />
         ))}
     </div>
   );
