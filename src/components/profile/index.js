@@ -13,6 +13,7 @@ import { fetcher } from "../../helpers";
 function ProfilePage() {
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = useState(null);
+  const [refetch, setRefetch] = useState(false);
   const { data: session, status } = useSession();
   const userEmail = session.user.email;
 
@@ -23,7 +24,7 @@ function ProfilePage() {
       );
       setUser(res.data[0]);
     })();
-  }, []);
+  }, [refetch]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,6 +35,10 @@ function ProfilePage() {
 
   const handleChange = (label) => (e) => {
     setUser({ ...user, [label]: e.target.value });
+  };
+
+  const handleCancel = () => {
+    setRefetch(!refetch);
   };
 
   const handleSubmit = async () => {
@@ -68,7 +73,7 @@ function ProfilePage() {
       name: user.name,
       image: user.image,
       phone: user.phone,
-      college: user.phone,
+      college: user.college,
       roll: user.roll,
     });
 
@@ -102,7 +107,13 @@ function ProfilePage() {
       <ToastContainer />
       {user && (
         <Container className="bg-white rounded-xl">
-          <ChooseCollegeForm open={open} handleClose={handleClose} />
+          <ChooseCollegeForm
+            open={open}
+            handleClose={handleClose}
+            user={user}
+            setUser={setUser}
+            handleChange={handleChange}
+          />
           <div className="flex justify-between items-center px-4">
             <div className="px-10 py-10 flex items-center">
               <Image
@@ -130,6 +141,7 @@ function ProfilePage() {
                 variant="outlined"
                 size="small"
                 // sx={{ borderColor: "#3f51b5" }}
+                onClick={handleCancel}
                 className="text-primary border-primary "
               >
                 cancel

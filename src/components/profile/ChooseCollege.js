@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -10,11 +10,21 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Link from "next/link";
 import useSWR from "swr";
 import { fetcher } from "../../helpers";
-import { useState } from "react";
-import { useEffect } from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-export default function ChooseCollegeForm({ open, handleClose }) {
+export default function ChooseCollegeForm({
+  open,
+  handleClose,
+  user,
+  setUser,
+  handleChange,
+}) {
   // const [open, setOpen] = React.useState(false);
+
   const { data, error, mutate } = useSWR(
     "http://localhost:8000/api/getAllCommunities",
     fetcher,
@@ -28,7 +38,7 @@ export default function ChooseCollegeForm({ open, handleClose }) {
     setCommunityList(data?.communities);
   }, [data]);
 
-  console.log("communityList ", communityList);
+  // console.log("communityList ", communityList);
 
   return (
     <div>
@@ -39,19 +49,38 @@ export default function ChooseCollegeForm({ open, handleClose }) {
             To access your college community, select your college from the
             drop-down menu
           </DialogContentText>
-          <Autocomplete
+          <InputLabel
+            className="mt-4 pl-2"
+            id="demo-simple-select-helper-label"
+          >
+            Select your community
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            value={user.college}
+            sx={{ m: 1, minWidth: "50%" }}
+            onChange={handleChange("college")}
+          >
+            {communityList?.map((comm, key) => (
+              <MenuItem value={comm.communityName}>
+                <em>{comm.communityName}</em>
+              </MenuItem>
+            ))}
+          </Select>
+          {/* <Autocomplete
             disablePortal
             options={
               communityList ? communityList : [{ label: "loading", id: 0 }]
             }
             getOptionLabel={(option) => option.communityName}
-            // onSelect={handleChange("college")}
+            onSelect={handleChange("college")}
             // sx={{ width: "60%" }}
             renderInput={(params) => (
               <TextField {...params} label="search your college" />
             )}
             className="bg-white rounded-2xl outline-hidden mt-4"
-          />
+          /> */}
           <DialogContentText className="mt-8">
             Can't see your college in the list? Create the online community for
             your college by{" "}
@@ -61,9 +90,6 @@ export default function ChooseCollegeForm({ open, handleClose }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} className="text-primary  ">
-            Cancel
-          </Button>
           <Button onClick={handleClose} className="text-primary  ">
             Save
           </Button>
