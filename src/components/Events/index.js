@@ -9,12 +9,25 @@ import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import useSWR from "swr";
 import { fetcher } from "../../helpers";
+import { useSession } from "next-auth/react";
 
 function EventSection({ events, allRegistrations, refreshRegistrations }) {
   const [eventOpen, setEventOpen] = React.useState(false);
-
+  const { data: session, status } = useSession();
   const { data, error, mutate } = useSWR(
     "http://localhost:8000/api/getevents",
+    fetcher,
+    {
+      revalidateIfStale: true,
+    }
+  );
+
+  const {
+    data: userdata,
+    error: userError,
+    mutate: userMutate,
+  } = useSWR(
+    `http://localhost:8000/api/getuser/${session.user.email}`,
     fetcher,
     {
       revalidateIfStale: true,
@@ -24,8 +37,12 @@ function EventSection({ events, allRegistrations, refreshRegistrations }) {
   const [filteredData, setFilteredData] = useState(data);
 
   useEffect(() => {
-    setFilteredData(data);
-  }, [data]);
+    const comdata = data?.filter((event) => {
+      return event.college == userdata[0].college;
+    });
+
+    setFilteredData(comdata);
+  }, [data, userdata]);
 
   const handleFilterChange = (e) => {
     let input = e.target.value.toLowerCase();
@@ -53,6 +70,8 @@ function EventSection({ events, allRegistrations, refreshRegistrations }) {
             mutate={mutate}
             eventOpen={eventOpen}
             handleClose={handleClose}
+            userdata={userdata}
+            userMutate={userMutate}
           />
           <div className="flex justify-between">
             <TextField

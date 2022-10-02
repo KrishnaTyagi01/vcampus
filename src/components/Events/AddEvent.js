@@ -17,7 +17,16 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 
-export default function AddEvent({ eventOpen, handleClose, mutate }) {
+export default function AddEvent({
+  eventOpen,
+  handleClose,
+  mutate,
+  userdata,
+  userMutate,
+}) {
+  const userCollege = userdata[0].college;
+  console.log("user data form add: ", userCollege);
+
   const [values, setValues] = useState({
     eventName: "",
     lastRegistrationDate: null,
@@ -129,6 +138,7 @@ export default function AddEvent({ eventOpen, handleClose, mutate }) {
       checkedValues,
       otherDetails: details,
       createdBy: session.user.email,
+      college: userCollege,
     });
 
     if (res.status == 200) {

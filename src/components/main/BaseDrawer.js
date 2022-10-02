@@ -117,32 +117,6 @@ export default function BaseDrawer() {
 
               <ListItem
                 disablePadding
-                onClick={() => setActive("cafe")}
-                style={{ marginBottom: ".5rem" }}
-                className={
-                  active === "cafe" ? "text-[#3f51b5] font-bold text-3xl" : ""
-                }
-              >
-                <ListItemButton>
-                  <ListItemIcon>
-                    <ChatIcon
-                      style={active === "cafe" ? { color: "#3f51b5" } : {}}
-                    />
-                  </ListItemIcon>
-                  <span
-                    className={
-                      active === "cafe"
-                        ? "font-roboto text-base capitalize "
-                        : "text-base capitalize"
-                    }
-                  >
-                    Cafeteria Talks
-                  </span>
-                </ListItemButton>
-              </ListItem>
-
-              <ListItem
-                disablePadding
                 onClick={() => setActive("profile")}
                 style={{ marginBottom: ".5rem" }}
                 className={

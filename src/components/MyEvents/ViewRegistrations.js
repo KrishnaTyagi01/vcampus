@@ -20,24 +20,6 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 export default function ViewRegistrations({
   registration,
   handleRegClose,
@@ -78,15 +60,15 @@ export default function ViewRegistrations({
               <TableHead>
                 <TableRow>
                   {namereq && <TableCell>Name</TableCell>}
-                  {emailreq && <TableCell align="right">Email</TableCell>}
-                  {deptreq && <TableCell align="right">Department</TableCell>}
-                  {sectionreq && <TableCell align="right">Section</TableCell>}
-                  {phonereq && <TableCell align="right">Phone no.</TableCell>}
-                  {rollnoreq && <TableCell align="right">Roll no.</TableCell>}
-                  {yearreq && <TableCell align="right">Year</TableCell>}
+                  {emailreq && <TableCell align="center">Email</TableCell>}
+                  {deptreq && <TableCell align="center">Department</TableCell>}
+                  {sectionreq && <TableCell align="center">Section</TableCell>}
+                  {phonereq && <TableCell align="center">Phone no.</TableCell>}
+                  {rollnoreq && <TableCell align="center">Roll no.</TableCell>}
+                  {yearreq && <TableCell align="center">Year</TableCell>}
                   {otherDetails &&
                     otherDetails.map((val, key) => (
-                      <TableCell align="right">{val}</TableCell>
+                      <TableCell align="center">{val}</TableCell>
                     ))}
                   {/* <TableCell align="right">Confirm </TableCell> */}
                 </TableRow>
@@ -97,28 +79,30 @@ export default function ViewRegistrations({
                     key={i}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    {namereq && <TableCell>{entry.name}</TableCell>}
+                    {namereq && (
+                      <TableCell align="center">{entry.name}</TableCell>
+                    )}
                     {emailreq && (
-                      <TableCell align="right">{entry.email}</TableCell>
+                      <TableCell align="center">{entry.email}</TableCell>
                     )}
                     {deptreq && (
-                      <TableCell align="right">{entry.dept}</TableCell>
+                      <TableCell align="center">{entry.dept}</TableCell>
                     )}
                     {sectionreq && (
-                      <TableCell align="right">{entry.section}</TableCell>
+                      <TableCell align="center">{entry.section}</TableCell>
                     )}
                     {phonereq && (
-                      <TableCell align="right">{entry.phone}</TableCell>
+                      <TableCell align="center">{entry.phone}</TableCell>
                     )}
                     {rollnoreq && (
-                      <TableCell align="right">{entry.roll}</TableCell>
+                      <TableCell align="center">{entry.roll}</TableCell>
                     )}
                     {yearreq && (
-                      <TableCell align="right">{entry.year}</TableCell>
+                      <TableCell align="center">{entry.year}</TableCell>
                     )}
                     {otherDetails &&
                       otherDetails.map((detail, key) => (
-                        <TableCell align="right">
+                        <TableCell align="center">
                           {entry.otherDetails[0][`${detail}`]}
                         </TableCell>
                       ))}
