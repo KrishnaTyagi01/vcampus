@@ -8,14 +8,32 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Autocomplete from "@mui/material/Autocomplete";
 import Link from "next/link";
+import useSWR from "swr";
+import { fetcher } from "../../helpers";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function ChooseCollegeForm({ open, handleClose }) {
   // const [open, setOpen] = React.useState(false);
+  const { data, error, mutate } = useSWR(
+    "http://localhost:8000/api/getAllCommunities",
+    fetcher,
+    {
+      revalidateIfStale: true,
+    }
+  );
+  const [communityList, setCommunityList] = useState(null);
+
+  useEffect(() => {
+    setCommunityList(data?.communities);
+  }, [data]);
+
+  console.log("communityList ", communityList);
 
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Select your community</DialogTitle>
         <DialogContent>
           <DialogContentText>
             To access your college community, select your college from the
@@ -23,8 +41,12 @@ export default function ChooseCollegeForm({ open, handleClose }) {
           </DialogContentText>
           <Autocomplete
             disablePortal
-            options={top100Films}
-            sx={{ width: 300 }}
+            options={
+              communityList ? communityList : [{ label: "loading", id: 0 }]
+            }
+            getOptionLabel={(option) => option.communityName}
+            // onSelect={handleChange("college")}
+            // sx={{ width: "60%" }}
             renderInput={(params) => (
               <TextField {...params} label="search your college" />
             )}
@@ -33,7 +55,7 @@ export default function ChooseCollegeForm({ open, handleClose }) {
           <DialogContentText className="mt-8">
             Can't see your college in the list? Create the online community for
             your college by{" "}
-            <Link href="/about">
+            <Link href="/newcommunity">
               <a>clicking here</a>
             </Link>
           </DialogContentText>

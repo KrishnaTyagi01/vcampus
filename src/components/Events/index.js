@@ -8,8 +8,7 @@ import AddEvent from "./AddEvent";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import useSWR from "swr";
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import { fetcher } from "../../helpers";
 
 function EventSection({ events, allRegistrations, refreshRegistrations }) {
   const [eventOpen, setEventOpen] = React.useState(false);

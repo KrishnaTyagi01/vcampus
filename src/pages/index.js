@@ -1,6 +1,5 @@
 import Hero from "../components/landing/Hero";
 import Navbar from "../components/Navbar";
-
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import "react-toastify/dist/ReactToastify.css";
