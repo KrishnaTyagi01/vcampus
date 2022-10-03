@@ -39,7 +39,7 @@ export default function SigninDialog({ openSignin, handleSigninClose }) {
       >
         <div className="flex flex-col items-center">
           <DialogTitle className="font-kanit text-[3rem]">
-            Welcome to vcampus
+            Welcome to BulletIn
           </DialogTitle>
           <DialogContentText style={{ marginTop: "-1rem" }}>
             PLEASE LOGIN TO CONTINUE

@@ -3,6 +3,8 @@ import { Container, Paper } from "@mui/material";
 import { Grid } from "@mui/material";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import GetAppIcon from "@mui/icons-material/GetApp";
+import AddIcon from "@mui/icons-material/Add";
+import EventIcon from "@mui/icons-material/Event";
 function Steps() {
   return (
     <Container
@@ -17,7 +19,7 @@ function Steps() {
         className="font-kanit capitalize text-5xl font-bold"
         style={{ marginTop: "-1rem" }}
       >
-        Creating Resume have never{" "}
+        Managing Events have never{" "}
         <span className="text-[#3f51b5]">been easier</span>
       </h1>
 
@@ -37,7 +39,7 @@ function Steps() {
             className="flex flex-col items-center min-h-full h-80"
             id="github_button"
           >
-            <ListAltIcon
+            <AddIcon
               style={{
                 height: 80,
                 width: 80,
@@ -48,9 +50,7 @@ function Steps() {
             <h1 className="text-[#00264d] font-kanit ">STEP 1</h1>
 
             <span className="font-Montserrat text-[gray] w-4/6 tracking-wider">
-              Easily add all the necessary information in the forms given in the
-              the sidebar. You get the options to Add, Update, shuffle order and
-              delete all the sections.
+              Join a community or create your own community
             </span>
           </Paper>
         </Grid>
@@ -65,7 +65,7 @@ function Steps() {
           }}
         >
           <Paper elevation={3} className="flex flex-col items-center">
-            <GetAppIcon
+            <EventIcon
               style={{
                 height: 80,
                 width: 80,
@@ -76,8 +76,8 @@ function Steps() {
             <h1 className="text-[#00264d] font-kanit ">STEP 2</h1>
 
             <span className="font-Montserrat text-[gray] w-4/6">
-              After filling all the Information, just click on the print button
-              to download your resume in PDF format.
+              After Joining a community you can post events and register for
+              already existing events in the community.
             </span>
           </Paper>
         </Grid>
@@ -92,7 +92,7 @@ function Steps() {
           }}
         >
           <Paper elevation={3} className="flex flex-col items-center">
-            <GetAppIcon
+            <ListAltIcon
               style={{
                 height: 80,
                 width: 80,
@@ -100,11 +100,11 @@ function Steps() {
                 paddingTop: 20,
               }}
             />
-            <h1 className="text-[#00264d] font-kanit ">STEP 2</h1>
+            <h1 className="text-[#00264d] font-kanit ">STEP 3</h1>
 
             <span className="font-Montserrat text-[gray] w-4/6">
-              After filling all the Information, just click on the print button
-              to download your resume in PDF format.
+              You can get all the registrations on your events on the same
+              platform.
             </span>
           </Paper>
         </Grid>

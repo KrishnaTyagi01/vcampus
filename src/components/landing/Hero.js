@@ -2,11 +2,12 @@ import { Button, Container, Grid, Hidden } from "@mui/material";
 import BuildIcon from "@mui/icons-material/Build";
 import React from "react";
 import Link from "next/link";
-// import DesignIllustration from "../../assets/design-illustration-2.svg";
+import Image from "next/image";
+import DesignIllustration from "../../assets/heroimg.svg";
 
 const Hero = () => {
   return (
-    <Container className="hero" style={{ width: "100%" }}>
+    <Container className="hero" style={{ width: "100%", marginBottom: "3rem" }}>
       <Grid container>
         <Grid
           lg={6}
@@ -21,20 +22,19 @@ const Hero = () => {
         >
           <Container className="">
             <h1 className="font-kanit capitalize font-bold	text-3xl leading-9	">
-              Build your professional resume in just 2 steps with
-              <span className="pl-4 text-4xl text-[#3f51b5]">Buildr.</span>
+              Create and Post Events for your community Easily on
+              <span className="pl-4 text-4xl text-[#3f51b5]">bulletIn</span>
             </h1>
 
             <h4
               className="hero_sub font-Montserrat font-normal	capitalize tracking-wide text-[gray]"
               style={{ letterSpacing: 1 }}
             >
-              Create professional resume that follow the exact ‘resume rules’
-              employers look for. Easy to use and done within minutes - try now
-              for free!
+              Create your community, post events and let members register for
+              your events all on one platform
             </h4>
 
-            <Link href="/resume">
+            {/* <Link href="/resume">
               <Button
                 variant="contained"
                 color="primary"
@@ -49,17 +49,17 @@ const Hero = () => {
               >
                 Login
               </Button>
-            </Link>
+            </Link> */}
           </Container>
         </Grid>
         <Hidden smDown>
-          {/* <Grid lg={6} md={6}>
-            <img
+          <Grid lg={6} md={6}>
+            <Image
               src={DesignIllustration}
               alt="Design Illustration"
               style={{ height: 700, width: 700 }}
             />
-          </Grid> */}
+          </Grid>
         </Hidden>
       </Grid>
     </Container>

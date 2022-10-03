@@ -5,20 +5,20 @@ import { Container, Grid, Hidden } from "@mui/material";
 
 const faqs = [
   {
-    ques: "Is Buildr really free?",
-    ans: "Yes, it's completely free for everyone.",
+    ques: "Is there a limit to number of events that we can post?",
+    ans: "No, a user can post as many events as they like.",
   },
   {
-    ques: "How many resumes can we create?",
-    ans: "There is no limit on number of resumes. You can create any number of resumes one at a time.",
+    ques: "Can we delete a event?",
+    ans: "Yes, A user can delete the event which was created by them.",
   },
   {
-    ques: "What will be the format of downloaded resume?",
-    ans: "Resume will be downloaded in pdf format",
+    ques: "Can we add custom field for the event registration form?",
+    ans: "Yes, each event can have it's own custom field.",
   },
   {
-    ques: "What is the size of the PDF?",
-    ans: "The size of the PDF is A4 which is the standard size for all Resume. It is usually less than 100kb.",
+    ques: "Where can we get the data of the registered users?",
+    ans: "You can view all the registations on your events on the myEvents section.",
   },
 ];
 
@@ -49,8 +49,7 @@ function Faq() {
           </h1>
 
           <span className="faq_para font-roboto text-[gray] text-xl">
-            Here are some frequently asked questions. If you have any other
-            questions, feel free to reach out via the contact form below.
+            Here are some frequently asked questions.
           </span>
 
           <div>

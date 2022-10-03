@@ -121,7 +121,7 @@ function NewCommunity() {
       <ToastContainer />
       <div className="bg-gray-100/75	min-h-screen flex flex-col items-center ">
         <Container className="bg-white rounded-xl flex flex-col justify-center items-center mb-8">
-          <h1 className="font-kanit text-5xl">Welcome to vcampus</h1>
+          <h1 className="font-kanit text-5xl">Welcome to BulletIn</h1>
           <h5
             style={{ marginTop: "-1rem" }}
             className="font-roboto font-light tracking-wider text-base"

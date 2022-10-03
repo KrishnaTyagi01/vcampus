@@ -7,6 +7,7 @@ import Faq from "../components/faqs";
 import Github from "../components/Github";
 import Steps from "./../components/landing/Steps";
 import BaseDrawer from "./../components/main/BaseDrawer";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -21,6 +22,7 @@ export default function Home() {
           <Steps />
           <Faq />
           <Github />
+          <Footer />
         </>
       )}
 
