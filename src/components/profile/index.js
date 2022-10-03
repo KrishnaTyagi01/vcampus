@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import useSWR from "swr";
 import { fetcher } from "../../helpers";
 
-function ProfilePage() {
+function ProfilePage({ userMutate, allUsersMutate }) {
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = useState(null);
   const [refetch, setRefetch] = useState(false);
@@ -98,6 +98,8 @@ function ProfilePage() {
         progress: undefined,
       });
     }
+    allUsersMutate();
+    userMutate();
     console.log("saved data: ", resp);
   };
 
@@ -116,7 +118,7 @@ function ProfilePage() {
           />
           <div className="flex justify-between items-center px-4">
             <div className="px-10 py-10 flex items-center">
-              <Image
+              {/* <Image
                 src={session ? session.user.image : nouser}
                 style={{
                   borderRadius: "50%",
@@ -125,7 +127,7 @@ function ProfilePage() {
                 height="150px"
                 width="150px"
                 layout="fixed"
-              ></Image>
+              ></Image> */}
               <div className="ml-4">
                 <Typography className="font-bold text-3xl font-roboto mb-2">
                   Profile

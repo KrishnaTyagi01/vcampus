@@ -11,7 +11,7 @@ import useSWR from "swr";
 import { fetcher } from "../../helpers";
 import { useSession } from "next-auth/react";
 
-function EventSection({ events, allRegistrations, refreshRegistrations }) {
+function EventSection({ events, allRegistrations, refreshRegistrations, userdata, userMutate }) {
   const [eventOpen, setEventOpen] = React.useState(false);
   const { data: session, status } = useSession();
   const { data, error, mutate } = useSWR(
@@ -22,23 +22,23 @@ function EventSection({ events, allRegistrations, refreshRegistrations }) {
     }
   );
 
-  const {
-    data: userdata,
-    error: userError,
-    mutate: userMutate,
-  } = useSWR(
-    `http://localhost:8000/api/getuser/${session.user.email}`,
-    fetcher,
-    {
-      revalidateIfStale: true,
-    }
-  );
+  // const {
+  //   data: userdata,
+  //   error: userError,
+  //   mutate: userMutate,
+  // } = useSWR(
+  //   `http://localhost:8000/api/getuser/${session.user.email}`,
+  //   fetcher,
+  //   {
+  //     revalidateIfStale: true,
+  //   }
+  // );
 
   const [filteredData, setFilteredData] = useState(data);
 
   useEffect(() => {
     const comdata = data?.filter((event) => {
-      return event.college == userdata[0].college;
+      return event.college == userdata[0]?.college;
     });
 
     setFilteredData(comdata);
@@ -64,7 +64,7 @@ function EventSection({ events, allRegistrations, refreshRegistrations }) {
 
   return (
     <>
-      {data && (
+      {data && userdata && (
         <>
           <AddEvent
             mutate={mutate}
@@ -107,19 +107,5 @@ function EventSection({ events, allRegistrations, refreshRegistrations }) {
     </>
   );
 }
-
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: "Pulp Fiction", year: 1994 },
-  {
-    label: "The Lord of the Rings: The Return of the King",
-    year: 2003,
-  },
-];
 
 export default EventSection;

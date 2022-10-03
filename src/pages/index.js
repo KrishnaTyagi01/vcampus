@@ -26,7 +26,7 @@ export default function Home() {
 
       {session && (
         <>
-          <BaseDrawer />
+          <BaseDrawer session={session} />
         </>
       )}
     </>
