@@ -58,3 +58,4 @@ amplifytools.xcconfig
 
 
 .env 
+.vercel
