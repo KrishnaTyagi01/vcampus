@@ -1,12 +1,20 @@
 /** @type {import('tailwindcss').Config} */
+const { join } = require("path");
 module.exports = {
   corePlugins: {
     // due to https://github.com/tailwindlabs/tailwindcss/issues/6602 - buttons disappear
     preflight: false,
   },
+  // content: [
+  //   join(__dirname, "src/pages/**/*.{js,ts,jsx,tsx}"),
+  //   join(__dirname, "src/components/**/*.{js,ts,jsx,tsx)"),
+  // ],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./src/pages/**/*.js",
+    "./src/pages/*.js",
+    "./src/components/**/*.js",
+    "./src/components/*.js",
+    "/src/helpers/**/*.js",
   ],
   theme: {
     extend: {
@@ -20,5 +28,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // require("@tailwindcss/aspect-ratio"),
+    // require("@tailwindcss/forms"),
+    // require("@tailwindcss/line-clamp"),
+    // require("@tailwindcss/typography"),
+  ],
 };

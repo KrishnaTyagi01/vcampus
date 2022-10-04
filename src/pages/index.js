@@ -8,29 +8,31 @@ import Github from "../components/Github";
 import Steps from "./../components/landing/Steps";
 import BaseDrawer from "./../components/main/BaseDrawer";
 import Footer from "../components/Footer";
-
+import { StyledEngineProvider } from "@mui/material/styles";
 export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
-  //11:35
+
   return (
     <>
-      {!session && (
-        <>
-          <Navbar />
-          <Hero />
-          <Steps />
-          <Faq />
-          <Github />
-          <Footer />
-        </>
-      )}
+      <StyledEngineProvider injectFirst>
+        {!session && (
+          <>
+            <Navbar />
+            <Hero />
+            <Steps />
+            <Faq />
+            <Github />
+            <Footer />
+          </>
+        )}
 
-      {session && (
-        <>
-          <BaseDrawer session={session} />
-        </>
-      )}
+        {session && (
+          <>
+            <BaseDrawer session={session} />
+          </>
+        )}
+      </StyledEngineProvider>
     </>
   );
 }

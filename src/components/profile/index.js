@@ -147,7 +147,10 @@ function ProfilePage({ userMutate, allUsersMutate }) {
                 size="small"
                 // sx={{ borderColor: "#3f51b5" }}
                 onClick={handleCancel}
-                className="text-primary border-primary "
+                style={{
+                  color: "#3f51b5",
+                  borderColor: "#3f51b5",
+                }}
               >
                 cancel
               </Button>

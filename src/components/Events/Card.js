@@ -1,6 +1,6 @@
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";

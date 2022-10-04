@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -304,6 +304,9 @@ export default function AddEvent({
         </DialogContent>
         <DialogActions>
           <Button
+            style={{
+              color: "#3f51b5",
+            }}
             onClick={() => {
               setToDefault();
               handleClose();
@@ -311,7 +314,14 @@ export default function AddEvent({
           >
             Cancel
           </Button>
-          <Button onClick={() => handleSubmit()}>submit</Button>
+          <Button
+            style={{
+              color: "#3f51b5",
+            }}
+            onClick={() => handleSubmit()}
+          >
+            submit
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

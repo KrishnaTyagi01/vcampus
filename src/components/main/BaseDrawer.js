@@ -4,7 +4,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
@@ -65,6 +65,10 @@ export default function BaseDrawer({ session }) {
   const [filteredUsers, setFilteredUsers] = useState(null);
 
   useEffect(() => {
+    if (!userdata) {
+      return;
+    }
+
     const filter = allUsers?.filter((user) => {
       return user.college == userdata[0]?.college;
     });

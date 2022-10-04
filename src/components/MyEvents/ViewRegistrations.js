@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -124,7 +124,11 @@ export default function ViewRegistrations({
           <Button onClick={handleRegClose} className="text-primary">
             Cancel
           </Button>
-          <Button onClick={handleRegClose} className="" variant="contained">
+          <Button
+            onClick={handleRegClose}
+            className="bg-primary"
+            variant="contained"
+          >
             Save
           </Button>
         </DialogActions>
