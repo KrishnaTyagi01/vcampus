@@ -20,7 +20,7 @@ function ProfilePage({ userMutate, allUsersMutate }) {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        `http://localhost:8000/api/getuser/${userEmail}`
+        `https://bulltetin.herokuapp.com/api/getuser/${userEmail}`
       );
       setUser(res.data[0]);
     })();
@@ -68,14 +68,17 @@ function ProfilePage({ userMutate, allUsersMutate }) {
       return;
     }
 
-    const resp = await axios.post("http://localhost:8000/api/updateuser", {
-      email: user.email,
-      name: user.name,
-      image: user.image,
-      phone: user.phone,
-      college: user.college,
-      roll: user.roll,
-    });
+    const resp = await axios.post(
+      "https://bulltetin.herokuapp.com/api/updateuser",
+      {
+        email: user.email,
+        name: user.name,
+        image: user.image,
+        phone: user.phone,
+        college: user.college,
+        roll: user.roll,
+      }
+    );
 
     if (resp.status == 200) {
       toast.success("Data saved successfully", {

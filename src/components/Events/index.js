@@ -11,28 +11,22 @@ import useSWR from "swr";
 import { fetcher } from "../../helpers";
 import { useSession } from "next-auth/react";
 
-function EventSection({ events, allRegistrations, refreshRegistrations, userdata, userMutate }) {
+function EventSection({
+  events,
+  allRegistrations,
+  refreshRegistrations,
+  userdata,
+  userMutate,
+}) {
   const [eventOpen, setEventOpen] = React.useState(false);
   const { data: session, status } = useSession();
   const { data, error, mutate } = useSWR(
-    "http://localhost:8000/api/getevents",
+    "https://bulltetin.herokuapp.com/api/getevents",
     fetcher,
     {
       revalidateIfStale: true,
     }
   );
-
-  // const {
-  //   data: userdata,
-  //   error: userError,
-  //   mutate: userMutate,
-  // } = useSWR(
-  //   `http://localhost:8000/api/getuser/${session.user.email}`,
-  //   fetcher,
-  //   {
-  //     revalidateIfStale: true,
-  //   }
-  // );
 
   const [filteredData, setFilteredData] = useState(data);
 

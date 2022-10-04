@@ -26,7 +26,7 @@ export default function ChooseCollegeForm({
   // const [open, setOpen] = React.useState(false);
 
   const { data, error, mutate } = useSWR(
-    "http://localhost:8000/api/getAllCommunities",
+    "https://bulltetin.herokuapp.com/api/getAllCommunities",
     fetcher,
     {
       revalidateIfStale: true,

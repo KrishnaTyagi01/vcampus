@@ -130,18 +130,21 @@ function Register({
       return;
     }
 
-    const res = await axios.post("http://localhost:8000/api/register", {
-      event: event._id,
-      username: username,
-      name,
-      phone,
-      roll,
-      email,
-      year,
-      section,
-      dept,
-      otherDetails: extra,
-    });
+    const res = await axios.post(
+      "https://bulltetin.herokuapp.com/api/register",
+      {
+        event: event._id,
+        username: username,
+        name,
+        phone,
+        roll,
+        email,
+        year,
+        section,
+        dept,
+        otherDetails: extra,
+      }
+    );
 
     if (res.status == 200) {
       toast.success("Registration completed", {

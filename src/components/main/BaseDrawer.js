@@ -34,7 +34,7 @@ export default function BaseDrawer({ session }) {
     error: userError,
     mutate: userMutate,
   } = useSWR(
-    `http://localhost:8000/api/getuser/${session.user.email}`,
+    `https://bulltetin.herokuapp.com/api/getuser/${session.user.email}`,
     fetcher,
     {
       revalidateIfStale: true,
@@ -45,7 +45,7 @@ export default function BaseDrawer({ session }) {
   // console.log("userdata: ", userdata);
 
   const { data, error, mutate } = useSWR(
-    "http://localhost:8000/api/getallregistrations",
+    "https://bulltetin.herokuapp.com/api/getallregistrations",
     fetcher,
     {
       revalidateIfStale: true,
@@ -56,7 +56,7 @@ export default function BaseDrawer({ session }) {
     data: allUsers,
     error: allUsersError,
     mutate: allUsersMutate,
-  } = useSWR("http://localhost:8000/api/getallusers", fetcher, {
+  } = useSWR("https://bulltetin.herokuapp.com/api/getallusers", fetcher, {
     revalidateIfStale: true,
   });
 

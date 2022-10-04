@@ -62,7 +62,7 @@ function NewCommunity() {
     if (activeStep == 1) {
       // check if name is unique, else throw error
       const resp = await axios.get(
-        `http://localhost:8000/api/isunique/${comName}`
+        `https://bulltetin.herokuapp.com/api/isunique/${comName}`
       );
 
       if (resp.data.isValid == false) {
@@ -84,7 +84,7 @@ function NewCommunity() {
     if (activeStep == 2) {
       // save community to database
       const createresp = await axios.post(
-        "http://localhost:8000/api/createcommunity",
+        "https://bulltetin.herokuapp.com/api/createcommunity",
         {
           communityName: comName,
           purpose,

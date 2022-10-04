@@ -38,9 +38,12 @@ export default function MyEventCard({ event, allRegistrations, refreshData }) {
   };
 
   const handleDelete = async () => {
-    const resp = await axios.post("http://localhost:8000/api/deleteevent", {
-      eventId: event._id,
-    });
+    const resp = await axios.post(
+      "https://bulltetin.herokuapp.com/api/deleteevent",
+      {
+        eventId: event._id,
+      }
+    );
 
     if (resp.status == 200) {
       toast.success("Event Deleted successfully", {

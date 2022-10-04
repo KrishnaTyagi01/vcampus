@@ -131,15 +131,18 @@ export default function AddEvent({
       return;
     }
 
-    const res = await axios.post("http://localhost:8000/api/newevent", {
-      eventName,
-      lastRegistrationDate,
-      eventDetails,
-      checkedValues,
-      otherDetails: details,
-      createdBy: session.user.email,
-      college: userCollege,
-    });
+    const res = await axios.post(
+      "https://bulltetin.herokuapp.com/api/newevent",
+      {
+        eventName,
+        lastRegistrationDate,
+        eventDetails,
+        checkedValues,
+        otherDetails: details,
+        createdBy: session.user.email,
+        college: userCollege,
+      }
+    );
 
     if (res.status == 200) {
       toast.success("Event Added successfully", {

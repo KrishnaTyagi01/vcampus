@@ -44,15 +44,17 @@ function NewUserProfile({ communityList }) {
       console.log("Fields can't be empty");
       return;
     }
-    // http://localhost:8000/api/updateuser
-    const res = await axios.post(`http://localhost:8000/api/updateuser`, {
-      name,
-      email,
-      image,
-      phone,
-      college,
-      roll,
-    });
+    const res = await axios.post(
+      `https://bulltetin.herokuapp.com/api/updateuser`,
+      {
+        name,
+        email,
+        image,
+        phone,
+        college,
+        roll,
+      }
+    );
 
     if (res.status == 200) {
       //redirect to dashboard

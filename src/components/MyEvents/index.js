@@ -8,7 +8,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function MyEventsSection({ allRegistrations }) {
   const { data, error, mutate } = useSWR(
-    "http://localhost:8000/api/getevents",
+    "https://bulltetin.herokuapp.com/api/getevents",
     fetcher,
     {
       revalidateIfStale: true,
