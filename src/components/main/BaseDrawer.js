@@ -25,6 +25,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import PacmanLoader from "react-spinners/PacmanLoader";
+import nouser from "../../assets/nouser.jpg";
 const drawerWidth = 300;
 
 const override = {
@@ -126,7 +127,7 @@ export default function BaseDrawer({ session }) {
               <div>
                 <div className="flex flex-col justify-items-center items-center mt-8">
                   <Image
-                    src={session?.user?.image}
+                    src={session ? session.user?.image : nouser}
                     height="130px"
                     width="130px"
                     layout="fixed"

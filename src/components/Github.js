@@ -46,7 +46,11 @@ function Github() {
         </Grid>
 
         <Grid lg={4} md={4} sm={12} xs={12}>
-          <a href="https://github.com/KrishnaTyagi01/vcampus" target="_blank">
+          <a
+            href="https://github.com/KrishnaTyagi01/vcampus"
+            target="_blank"
+            className="no-underline	"
+          >
             <Button
               variant="contained"
               color="primary"
