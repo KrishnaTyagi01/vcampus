@@ -77,19 +77,13 @@ function EventSection({
               className="bg-white rounded-2xl outline-hidden"
             />
 
-            <button
-              onClick={handleClickOpen}
-              className="py-2 px-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-[#fff] hover:cursor-pointer outline-none border-none rounded-2xl capitalize"
-            >
-              Add New Event
-            </button>
-            {/* <Button
+            <Button
               startIcon={<AddIcon />}
               onClick={handleClickOpen}
               className="py-2 px-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-[#fff] outline-none border-none rounded-2xl capitalize"
             >
               Add New Event
-            </Button> */}
+            </Button>
           </div>
 
           <div className="mt-10 ">

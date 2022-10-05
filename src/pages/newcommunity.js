@@ -196,13 +196,14 @@ function NewCommunity() {
                                     width="50px"
                                   />
                                   <Typography className="font-kanit font-bold text-xl ml-6">
-                                    For college clubs and society
+                                    For clubs and society
                                   </Typography>
                                 </div>
                               </AccordionSummary>
                               <AccordionDetails>
                                 <Typography id="font-roboto">
-                                  For clubs{" "}
+                                  The purpose of this community is unofficial
+                                  clubs and societies.
                                 </Typography>
                               </AccordionDetails>
                             </Accordion>
@@ -236,13 +237,15 @@ function NewCommunity() {
                                     width="50px"
                                   />
                                   <Typography className="font-kanit font-bold text-xl ml-6">
-                                    Official college community
+                                    Official community
                                   </Typography>
                                 </div>
                               </AccordionSummary>
                               <AccordionDetails>
                                 <Typography id="font-roboto">
-                                  Official{" "}
+                                  This community will be used for official
+                                  purposes such as, official college community
+                                  or official department community.
                                 </Typography>
                               </AccordionDetails>
                             </Accordion>

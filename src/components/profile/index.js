@@ -42,7 +42,7 @@ function ProfilePage({ userMutate, allUsersMutate }) {
   };
 
   const handleSubmit = async () => {
-    if (user.name.length < 3) {
+    if (!user.name || user?.name.length < 3) {
       toast.error("Name should contain more than 3 characters", {
         position: "top-right",
         autoClose: 1000,
@@ -55,8 +55,8 @@ function ProfilePage({ userMutate, allUsersMutate }) {
       return;
     }
 
-    if (user.phone.length != 10) {
-      toast.error("Phone should contain 10 characters", {
+    if (!user.phone || user?.phone.length != 10) {
+      toast.error("Phone no. should contain 10 characters", {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
@@ -209,7 +209,7 @@ function ProfilePage({ userMutate, allUsersMutate }) {
           <div className="flex justify-end px-4">
             <span>
               <span className="text-gray-500 font-roboto text-sm capitalize pr-2	">
-                Not your university?
+                Not your community?
               </span>
               <Button
                 sx={{}}

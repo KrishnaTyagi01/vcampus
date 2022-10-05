@@ -138,9 +138,6 @@ export default function BaseDrawer({ session }) {
                   <span className="font-roboto font-bold capitalize">
                     {userdata[0]?.name}
                   </span>
-                  <span className="font-Mono font-extralight text-sm	opacity-50	 capitalize text-[#DCDCDC	]">
-                    new delhi, India
-                  </span>
                 </div>
 
                 <Toolbar />

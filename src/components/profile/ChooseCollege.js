@@ -47,8 +47,8 @@ export default function ChooseCollegeForm({
         <DialogTitle>Select your community</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To access your college community, select your college from the
-            drop-down menu
+            To access your community, select your community from the drop-down
+            menu
           </DialogContentText>
           <InputLabel
             className="mt-4 pl-2"
@@ -69,29 +69,17 @@ export default function ChooseCollegeForm({
               </MenuItem>
             ))}
           </Select>
-          {/* <Autocomplete
-            disablePortal
-            options={
-              communityList ? communityList : [{ label: "loading", id: 0 }]
-            }
-            getOptionLabel={(option) => option.communityName}
-            onSelect={handleChange("college")}
-            // sx={{ width: "60%" }}
-            renderInput={(params) => (
-              <TextField {...params} label="search your college" />
-            )}
-            className="bg-white rounded-2xl outline-hidden mt-4"
-          /> */}
+
           <DialogContentText className="mt-8">
-            Can't see your college in the list? Create the online community for
-            your college by{" "}
+            Can't see your community in the list? Create a new online community
+            by
             <Link
               href={{
                 pathname: "/newcommunity",
                 query: { from: router.pathname },
               }}
             >
-              <a>clicking here</a>
+              <a> clicking here</a>
             </Link>
           </DialogContentText>
         </DialogContent>
@@ -104,17 +92,3 @@ export default function ChooseCollegeForm({
     </div>
   );
 }
-
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
-  { label: "Schindler's List", year: 1993 },
-  { label: "Pulp Fiction", year: 1994 },
-  {
-    label: "The Lord of the Rings: The Return of the King",
-    year: 2003,
-  },
-];

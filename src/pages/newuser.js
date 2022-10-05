@@ -250,7 +250,7 @@ function NewUserProfile({ communityList }) {
             <div className="flex justify-end px-4">
               <span>
                 <span className="text-gray-500 font-roboto text-sm capitalize pr-2	">
-                  Can't find your college? create a community for your college
+                  Can't find your community? create a new community
                 </span>
                 <span className="font-kanit">
                   <Link
@@ -260,9 +260,7 @@ function NewUserProfile({ communityList }) {
                     }}
                     className="text-primary font-kanit decoration-solid"
                   >
-                    {/* <span className=""> */}
                     CREATE
-                    {/* </span> */}
                   </Link>
                 </span>
               </span>
