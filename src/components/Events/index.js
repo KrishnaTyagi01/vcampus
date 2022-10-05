@@ -93,6 +93,11 @@ function EventSection({
           </div>
 
           <div className="mt-10 ">
+            {filteredData?.length == 0 && (
+              <div className="flex justify-center">
+                <h2 className="font-kanit ">No Events posted yet</h2>
+              </div>
+            )}
             {filteredData?.map((event, key) => (
               <BasicCard
                 key={key}

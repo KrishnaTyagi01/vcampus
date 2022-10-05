@@ -31,7 +31,11 @@ function MyEventsSection({ allRegistrations }) {
   return (
     <div>
       <ToastContainer />
-
+      {filteredData && filteredData.length == 0 && (
+        <div className="flex justify-center">
+          <h2 className="font-kanit ">You have not Events posted yet</h2>
+        </div>
+      )}
       {filteredData &&
         filteredData.map((event, key) => (
           <MyEventCard
