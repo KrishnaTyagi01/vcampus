@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useRouter } from "next/router";
 
 export default function ChooseCollegeForm({
   open,
@@ -24,7 +25,7 @@ export default function ChooseCollegeForm({
   handleChange,
 }) {
   // const [open, setOpen] = React.useState(false);
-
+  const router = useRouter();
   const { data, error, mutate } = useSWR(
     "https://bulltetin.herokuapp.com/api/getAllCommunities",
     fetcher,
@@ -84,7 +85,12 @@ export default function ChooseCollegeForm({
           <DialogContentText className="mt-8">
             Can't see your college in the list? Create the online community for
             your college by{" "}
-            <Link href="/newcommunity">
+            <Link
+              href={{
+                pathname: "/newcommunity",
+                query: { from: router.pathname },
+              }}
+            >
               <a>clicking here</a>
             </Link>
           </DialogContentText>

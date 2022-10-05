@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const base = process.env.BASE_URL;
 
 export const getAllCommunities = async () => {
