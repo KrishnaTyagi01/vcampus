@@ -33,7 +33,7 @@ function MyEventsSection({ allRegistrations }) {
       <ToastContainer />
       {filteredData && filteredData.length == 0 && (
         <div className="flex justify-center">
-          <h2 className="font-kanit ">You have not Events posted yet</h2>
+          <h2 className="font-kanit ">You have not posted any events yet</h2>
         </div>
       )}
       {filteredData &&
