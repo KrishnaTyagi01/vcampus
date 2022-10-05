@@ -24,8 +24,14 @@ import { fetcher } from "../../helpers";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import AvatarGroup from "@mui/material/AvatarGroup";
-
+import PacmanLoader from "react-spinners/PacmanLoader";
 const drawerWidth = 300;
+
+const override = {
+  display: "block",
+  margin: "auto auto",
+  borderColor: "#3f51b5",
+};
 
 export default function BaseDrawer({ session }) {
   // const [session, setSession] = useState(null);
@@ -81,6 +87,17 @@ export default function BaseDrawer({ session }) {
 
   return (
     <>
+      {!userdata && (
+        <div className=" h-screen w-full flex items-center justify-center">
+          <PacmanLoader
+            color="#3f51b5"
+            loading={!userdata}
+            cssOverride={override}
+            size={50}
+            aria-label="Loading Spinner"
+          />
+        </div>
+      )}
       {userdata && (
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
