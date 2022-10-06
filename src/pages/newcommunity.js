@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { Container } from "@mui/material";
-import { Typography, TextField, Button } from "@mui/material";
-import Image from "next/image";
-import nouser from "../assets/nouser.jpg";
-import { StyledEngineProvider } from "@mui/material/styles";
-import { useSession, getSession } from "next-auth/react";
-import Link from "next/link";
-import axios from "axios";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
+import Checkbox from "@mui/material/Checkbox";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Paper from "@mui/material/Paper";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Checkbox from "@mui/material/Checkbox";
+import Stepper from "@mui/material/Stepper";
+import { StyledEngineProvider } from "@mui/material/styles";
+import axios from "axios";
+import { getSession, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import clubImg from "../assets/clubs.svg";
 import collegeImg from "../assets/college.svg";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { toast, ToastContainer } from "react-toastify";
-import useSWR from "swr";
-import { fetcher } from "../helpers";
 
-import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import "react-toastify/dist/ReactToastify.css";
 const steps = ["Purpose", "community name", "Description"];
 function NewCommunity() {
   const router = useRouter();

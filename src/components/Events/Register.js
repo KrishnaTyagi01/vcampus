@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
+import { Button, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Typography } from "@mui/material";
-import { useSession } from "next-auth/react";
+import TextField from "@mui/material/TextField";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { useSession } from "next-auth/react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 function Register({
   openRegister,

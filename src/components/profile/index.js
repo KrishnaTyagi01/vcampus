@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Container } from "@mui/material";
-import { Typography, TextField, Button } from "@mui/material";
-import Image from "next/image";
-import nouser from "../../assets/nouser.jpg";
-import ChooseCollegeForm from "./ChooseCollege";
-import { useSession } from "next-auth/react";
+import { Button, Container, TextField, Typography } from "@mui/material";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import useSWR from "swr";
-import { fetcher } from "../../helpers";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import ChooseCollegeForm from "./ChooseCollege";
 
 function ProfilePage({ userMutate, allUsersMutate }) {
   const [open, setOpen] = React.useState(false);

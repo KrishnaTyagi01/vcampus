@@ -1,8 +1,6 @@
-import { Button, Container, Grid, Hidden } from "@mui/material";
-import BuildIcon from "@mui/icons-material/Build";
-import React from "react";
-import Link from "next/link";
+import { Container, Grid, Hidden } from "@mui/material";
 import Image from "next/image";
+import React from "react";
 import DesignIllustration from "../../assets/heroimg.svg";
 
 const Hero = () => {
@@ -33,23 +31,6 @@ const Hero = () => {
               Create your community, post events and let members register for
               your events all on one platform
             </h4>
-
-            {/* <Link href="/resume">
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                startIcon={<BuildIcon />}
-                className="hero_button"
-                style={{
-                  borderRadius: 30,
-                  padding: "20px 40px",
-                  marginTop: 40,
-                }}
-              >
-                Login
-              </Button>
-            </Link> */}
           </Container>
         </Grid>
         <Hidden smDown>

@@ -1,5 +1,4 @@
-import { Container, Grid, Button } from "@mui/material";
-import Link from "next/link";
+import { Button, Container, Grid } from "@mui/material";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 

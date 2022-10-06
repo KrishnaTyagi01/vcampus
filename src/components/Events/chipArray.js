@@ -1,25 +1,6 @@
-import React from "react";
 import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
-// import Paper from "@material-ui/core/Paper";
-// import TagFacesIcon from "@material-ui/icons/TagFaces";
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: "flex",
-//     justifyContent: "center",
-//     flexWrap: "wrap",
-//     listStyle: "none",
-//     margin: 0,
-//     width: "55%",
-//     minHeight: 50,
-//     marginBottom: 40,
-//   },
-//   chip: {
-//     margin: theme.spacing(0.5),
-//   },
-// }));
+import React from "react";
 
 const ChipsArray = (props) => {
   const { details, setDetails } = props;
