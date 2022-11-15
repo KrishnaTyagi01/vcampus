@@ -20,6 +20,7 @@ function EventSection({
 }) {
   const [eventOpen, setEventOpen] = React.useState(false);
   const { data: session, status } = useSession();
+
   const { data, error, mutate } = useSWR(
     "https://bulltetin.herokuapp.com/api/getevents",
     fetcher,
@@ -38,7 +39,18 @@ function EventSection({
     setFilteredData(comdata);
   }, [data, userdata]);
 
-  const handleFilterChange = (e) => {
+  function debounce(cb, delay = 1000) {
+    let timeout;
+
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        cb(...args);
+      }, delay);
+    };
+  }
+
+  const handleFilterChange = debounce((e) => {
     let input = e.target.value.toLowerCase();
 
     const filtered = data.filter((event) => {
@@ -46,7 +58,7 @@ function EventSection({
     });
 
     setFilteredData(filtered);
-  };
+  }, 1000);
 
   const handleClickOpen = () => {
     setEventOpen(true);
