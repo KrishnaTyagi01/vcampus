@@ -23,7 +23,7 @@ export default function ChooseCollegeForm({
   // const [open, setOpen] = React.useState(false);
   const router = useRouter();
   const { data, error, mutate } = useSWR(
-    "https://bulltetin.herokuapp.com/api/getAllCommunities",
+    "https://bulletinapi.onrender.com/api/getAllCommunities",
     fetcher,
     {
       revalidateIfStale: true,

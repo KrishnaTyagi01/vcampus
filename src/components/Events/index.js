@@ -22,7 +22,7 @@ function EventSection({
   const { data: session, status } = useSession();
 
   const { data, error, mutate } = useSWR(
-    "https://bulltetin.herokuapp.com/api/getevents",
+    "https://bulletinapi.onrender.com/api/getevents",
     fetcher,
     {
       revalidateIfStale: true,
@@ -58,7 +58,7 @@ function EventSection({
     });
 
     setFilteredData(filtered);
-  }, 1000);
+  }, 250);
 
   const handleClickOpen = () => {
     setEventOpen(true);

@@ -15,7 +15,7 @@ function ProfilePage({ userMutate, allUsersMutate }) {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        `https://bulltetin.herokuapp.com/api/getuser/${userEmail}`
+        `https://bulletinapi.onrender.com/api/getuser/${userEmail}`
       );
       setUser(res.data[0]);
     })();
@@ -64,7 +64,7 @@ function ProfilePage({ userMutate, allUsersMutate }) {
     }
 
     const resp = await axios.post(
-      "https://bulltetin.herokuapp.com/api/updateuser",
+      "https://bulletinapi.onrender.com/api/updateuser",
       {
         email: user.email,
         name: user.name,

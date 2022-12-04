@@ -39,7 +39,7 @@ export default function MyEventCard({ event, allRegistrations, refreshData }) {
 
   const handleDelete = async () => {
     const resp = await axios.post(
-      "https://bulltetin.herokuapp.com/api/deleteevent",
+      "https://bulletinapi.onrender.com/api/deleteevent",
       {
         eventId: event._id,
       }

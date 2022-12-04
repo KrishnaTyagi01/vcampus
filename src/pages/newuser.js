@@ -94,7 +94,7 @@ function NewUserProfile({ communityList }) {
     }
 
     const res = await axios.post(
-      `https://bulltetin.herokuapp.com/api/updateuser`,
+      `https://bulletinapi.onrender.com/api/updateuser`,
       {
         name,
         email,

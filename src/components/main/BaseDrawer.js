@@ -39,7 +39,7 @@ export default function BaseDrawer({ session }) {
     error: userError,
     mutate: userMutate,
   } = useSWR(
-    `https://bulltetin.herokuapp.com/api/getuser/${session.user.email}`,
+    `https://bulletinapi.onrender.com/api/getuser/${session.user.email}`,
     fetcher,
     {
       revalidateIfStale: true,
@@ -50,7 +50,7 @@ export default function BaseDrawer({ session }) {
   // console.log("userdata: ", userdata);
 
   const { data, error, mutate } = useSWR(
-    "https://bulltetin.herokuapp.com/api/getallregistrations",
+    "https://bulletinapi.onrender.com/api/getallregistrations",
     fetcher,
     {
       revalidateIfStale: true,
@@ -61,7 +61,8 @@ export default function BaseDrawer({ session }) {
     data: allUsers,
     error: allUsersError,
     mutate: allUsersMutate,
-  } = useSWR("https://bulltetin.herokuapp.com/api/getallusers", fetcher, {
+  } = useSWR("https://bulletinapi.onrender.com/api/getallusers", fetcher, {
+    credentials: "include",
     revalidateIfStale: true,
   });
 

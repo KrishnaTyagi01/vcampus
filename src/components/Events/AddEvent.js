@@ -132,7 +132,7 @@ export default function AddEvent({
     }
 
     const res = await axios.post(
-      "https://bulltetin.herokuapp.com/api/newevent",
+      "https://bulletinapi.onrender.com/api/newevent",
       {
         eventName,
         lastRegistrationDate,

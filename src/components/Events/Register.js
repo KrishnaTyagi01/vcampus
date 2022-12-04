@@ -129,7 +129,7 @@ function Register({
     }
 
     const res = await axios.post(
-      "https://bulltetin.herokuapp.com/api/register",
+      "https://bulletinapi.onrender.com/api/register",
       {
         event: event._id,
         username: username,
